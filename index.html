@@ -3,7 +3,7 @@
 <head>
     <title>Галактика Ценностей - Гимназия им. Е.М. Примакова</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Интерактивная галактика ценностей учеников гимназии">
     <style>
         * { 
@@ -15,11 +15,11 @@
         body { 
             background: #000; 
             color: white; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
             overflow: hidden; 
             cursor: default;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         
         canvas { 
@@ -52,10 +52,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: #ffdd00;
-            font-size: clamp(18px, 4vw, 24px);
+            font-size: 18px;
             text-align: center;
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 0.98));
-            padding: clamp(20px, 5vw, 40px);
+            padding: 25px;
             border-radius: 20px;
             border: 3px solid;
             border-image: linear-gradient(45deg, #ffdd00, #ff8c00, #ffdd00) 1;
@@ -63,7 +63,7 @@
             box-shadow: 0 0 60px rgba(255, 221, 0, 0.4);
             z-index: 1000;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
         }
         
         @keyframes borderRotate {
@@ -75,9 +75,9 @@
         .loading::after {
             content: '';
             display: block;
-            width: 50px;
-            height: 50px;
-            margin: 30px auto;
+            width: 40px;
+            height: 40px;
+            margin: 20px auto;
             border: 4px solid rgba(255, 221, 0, 0.3);
             border-top-color: #ffdd00;
             border-radius: 50%;
@@ -90,19 +90,19 @@
         
         .header {
             position: absolute;
-            top: max(20px, 3vh);
+            top: 15px;
             left: 50%;
             transform: translateX(-50%);
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 0.95));
-            padding: clamp(15px, 3vw, 25px);
-            border-radius: 15px;
+            padding: 12px;
+            border-radius: 12px;
             border: 2px solid;
             border-image: linear-gradient(45deg, rgba(255, 221, 0, 0.7), rgba(255, 140, 0, 0.5)) 1;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 5px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             z-index: 200;
             text-align: center;
-            max-width: min(700px, 90vw);
-            width: auto;
+            width: 94%;
+            max-width: 600px;
             backdrop-filter: blur(10px);
         }
         
@@ -111,39 +111,36 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: clamp(22px, 5.5vw, 32px);
-            margin-bottom: 8px;
-            text-shadow: 0 0 15px rgba(255, 221, 0, 0.5);
+            font-size: 20px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 221, 0, 0.5);
             line-height: 1.2;
             font-weight: 800;
-            letter-spacing: -0.5px;
         }
         
         .header p {
             color: #aaddff;
-            font-size: clamp(15px, 3.5vw, 18px);
-            line-height: 1.4;
-            font-weight: 400;
+            font-size: 13px;
+            line-height: 1.3;
             opacity: 0.9;
         }
         
         .controls {
             position: absolute;
-            bottom: max(25px, 4vh);
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: clamp(12px, 2vw, 20px);
+            flex-direction: column;
+            gap: 10px;
             background: rgba(0, 0, 0, 0.85);
-            padding: clamp(15px, 3vw, 20px);
-            border-radius: 20px;
+            padding: 15px;
+            border-radius: 15px;
             border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
             z-index: 200;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 92%;
-            max-width: 1000px;
+            width: 94%;
+            max-width: 500px;
             backdrop-filter: blur(10px);
         }
         
@@ -151,35 +148,26 @@
             background: linear-gradient(145deg, rgba(80, 80, 120, 0.95), rgba(50, 50, 80, 0.98));
             color: white;
             font-weight: 600;
-            font-size: clamp(15px, 3.5vw, 19px);
+            font-size: 15px;
             border: none;
             border-bottom: 3px solid rgba(255, 215, 0, 0.6);
-            padding: clamp(16px, 2.5vw, 22px) clamp(28px, 4vw, 40px);
-            border-radius: 16px;
+            padding: 14px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: min(260px, 85vw);
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            flex: 1;
-            white-space: nowrap;
-            letter-spacing: 0.3px;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            letter-spacing: 0.5px;
         }
         
-        .control-btn:hover {
+        .control-btn:hover, .control-btn:active {
             background: linear-gradient(145deg, rgba(100, 100, 150, 0.95), rgba(70, 70, 110, 0.98));
-            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15);
-            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
             border-bottom-color: rgba(255, 215, 0, 0.9);
-        }
-        
-        .control-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border-bottom-width: 2px;
         }
         
         .stats-btn {
@@ -187,9 +175,8 @@
             border-bottom: 3px solid rgba(65, 105, 225, 0.6);
         }
         
-        .stats-btn:hover {
+        .stats-btn:hover, .stats-btn:active {
             background: linear-gradient(145deg, rgba(85, 125, 200, 0.95), rgba(65, 105, 180, 0.98));
-            border-bottom-color: rgba(65, 105, 225, 0.9);
         }
         
         .info-btn {
@@ -197,55 +184,40 @@
             border-bottom: 3px solid rgba(50, 205, 50, 0.6);
         }
         
-        .info-btn:hover {
+        .info-btn:hover, .info-btn:active {
             background: linear-gradient(145deg, rgba(70, 200, 70, 0.95), rgba(50, 180, 50, 0.98));
-            border-bottom-color: rgba(50, 205, 50, 0.9);
         }
         
         .tooltip {
             position: absolute;
             background: rgba(0, 0, 0, 0.97);
             color: white;
-            padding: clamp(18px, 3vw, 24px);
-            border-radius: 15px;
-            font-size: clamp(15px, 3vw, 17px);
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 14px;
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.3s;
-            border: 3px solid #ffdd00;
-            box-shadow: 0 0 50px rgba(255, 221, 0, 0.4);
-            max-width: min(380px, 90vw);
+            border: 2px solid #ffdd00;
+            box-shadow: 0 0 40px rgba(255, 221, 0, 0.4);
+            max-width: 320px;
             z-index: 1000;
-            line-height: 1.5;
+            line-height: 1.4;
             backdrop-filter: blur(10px);
         }
         
         .star-name {
             color: #ffdd00;
             font-weight: bold;
-            margin-bottom: 12px;
-            font-size: clamp(19px, 4.5vw, 24px);
-            text-shadow: 0 0 15px rgba(255, 221, 0, 0.5);
+            margin-bottom: 8px;
+            font-size: 16px;
         }
         
         .star-info {
             color: #aaddff;
-            font-size: clamp(14px, 3vw, 16px);
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-        
-        .cursor-glow {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 221, 0, 0.8) 0%, transparent 70%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
-            z-index: 50;
-            filter: blur(3px);
+            font-size: 13px;
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
         
         .overlay {
@@ -259,60 +231,34 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            padding: 20px;
+            padding: 15px;
             overflow-y: auto;
-            overflow-x: hidden;
         }
         
         .modal-container {
             background: linear-gradient(135deg, rgba(20, 20, 40, 0.98), rgba(15, 15, 35, 0.99));
-            padding: clamp(25px, 5vw, 40px);
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 15px;
             width: 100%;
-            max-width: min(800px, 95vw);
+            max-width: 500px;
             border: 2px solid;
             border-image: linear-gradient(45deg, rgba(255, 215, 0, 0.6), rgba(65, 105, 225, 0.6)) 1;
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
             max-height: 85vh;
             overflow-y: auto;
-            overflow-x: hidden;
-            margin: auto;
-            position: relative;
-        }
-        
-        .modal-container::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
-            border-radius: 22px;
-            z-index: -1;
-            animation: borderGlow 4s ease-in-out infinite;
-        }
-        
-        @keyframes borderGlow {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
         }
         
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: clamp(25px, 4vw, 40px);
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-bottom: 20px;
         }
         
         .modal-header h2 {
             color: #ffd700;
-            font-size: clamp(26px, 5.5vw, 34px);
-            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-            flex: 1;
-            min-width: 200px;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
             line-height: 1.2;
         }
         
@@ -320,69 +266,55 @@
             background: linear-gradient(145deg, rgba(255, 80, 80, 0.95), rgba(220, 60, 60, 0.98));
             color: white;
             border: none;
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 26px;
+            font-size: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             flex-shrink: 0;
             border-bottom: 3px solid rgba(255, 0, 0, 0.6);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-            position: relative;
-            z-index: 10;
         }
         
-        .close-btn:hover {
+        .close-btn:hover, .close-btn:active {
             background: linear-gradient(145deg, rgba(255, 100, 100, 0.95), rgba(240, 80, 80, 0.98));
-            border-bottom-color: rgba(255, 50, 50, 0.9);
-            box-shadow: 0 0 25px rgba(255, 100, 100, 0.8);
-            transform: scale(1.1);
-        }
-        
-        .close-btn:active {
-            transform: scale(0.95);
+            transform: scale(1.05);
         }
         
         .form-group {
-            margin-bottom: 28px;
+            margin-bottom: 20px;
             width: 100%;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
             color: #ffd700;
             font-weight: bold;
-            font-size: clamp(17px, 3.5vw, 20px);
-            width: 100%;
+            font-size: 15px;
         }
         
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: clamp(14px, 2.5vw, 18px);
+            padding: 12px;
             background: rgba(10, 10, 20, 0.9);
             border: 2px solid rgba(65, 105, 225, 0.5);
-            border-radius: 12px;
+            border-radius: 10px;
             color: white;
-            font-size: clamp(15px, 3vw, 18px);
+            font-size: 15px;
             transition: all 0.3s;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), 0 3px 10px rgba(0, 0, 0, 0.3);
             font-family: inherit;
         }
         
         .form-group select {
-            background: rgba(10, 10, 20, 0.9) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") no-repeat right 15px center;
-            background-size: 20px;
-            padding-right: 50px;
+            background: rgba(10, 10, 20, 0.9) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") no-repeat right 12px center;
+            background-size: 18px;
+            padding-right: 40px;
         }
         
         .form-group input:focus,
@@ -390,56 +322,43 @@
         .form-group select:focus {
             outline: none;
             border-color: rgba(255, 215, 0, 0.8);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 215, 0, 0.3);
             background: rgba(15, 15, 25, 0.95);
         }
         
         .form-group textarea {
-            min-height: 120px;
+            min-height: 100px;
             resize: vertical;
-            font-family: inherit;
-        }
-        
-        .required::after {
-            content: " *";
-            color: #ff4444;
         }
         
         .value-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 14px;
-            margin-top: 14px;
-            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
         }
         
         .value-option {
-            padding: clamp(16px, 2.5vw, 22px);
+            padding: 14px;
             background: linear-gradient(135deg, rgba(40, 40, 70, 0.8), rgba(30, 30, 60, 0.9));
             border: 2px solid rgba(65, 105, 225, 0.4);
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s;
             text-align: center;
             font-weight: bold;
             color: white;
-            font-size: clamp(15px, 3vw, 17px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            font-size: 14px;
         }
         
-        .value-option:hover {
+        .value-option:hover, .value-option:active {
             border-color: rgba(255, 215, 0, 0.6);
             background: linear-gradient(135deg, rgba(60, 60, 100, 0.8), rgba(50, 50, 90, 0.9));
-            transform: translateY(-3px);
         }
         
         .value-option.selected {
             background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 185, 0, 0.3));
             border-color: rgba(255, 215, 0, 0.8);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform: scale(1.03);
-            color: #ffdd00 !important;
-            text-shadow: 0 0 10px rgba(255, 221, 0, 0.5);
+            color: #ffdd00;
         }
         
         .submit-btn {
@@ -447,96 +366,172 @@
             background: linear-gradient(45deg, #32cd32, #00ced1);
             color: black;
             border: none;
-            padding: clamp(18px, 3vw, 24px);
-            border-radius: 12px;
-            font-size: clamp(17px, 3.5vw, 22px);
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 20px;
             transition: all 0.3s;
             border-bottom: 3px solid rgba(0, 200, 200, 0.6);
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-            display: block;
-            letter-spacing: 0.5px;
         }
         
-        .submit-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 35px rgba(50, 205, 50, 0.5);
-            border-bottom-color: rgba(0, 230, 230, 0.9);
+        .submit-btn:hover, .submit-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4);
         }
         
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
-            margin-bottom: 35px;
-            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
         }
         
         .stat-card {
             background: linear-gradient(135deg, rgba(30, 30, 50, 0.9), rgba(20, 20, 40, 0.95));
-            padding: 22px;
-            border-radius: 16px;
+            padding: 15px;
+            border-radius: 12px;
             border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .stat-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(255, 215, 0, 0.6);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.2), 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
         }
         
         .stat-card h3 {
             color: #ffd700;
-            margin-bottom: 14px;
-            font-size: clamp(17px, 3.5vw, 21px);
+            margin-bottom: 10px;
+            font-size: 14px;
         }
         
         .stat-value {
-            font-size: clamp(26px, 6.5vw, 40px);
+            font-size: 22px;
             font-weight: bold;
             color: #aaddff;
-            text-shadow: 0 0 12px rgba(170, 221, 255, 0.5);
+            text-shadow: 0 0 8px rgba(170, 221, 255, 0.5);
             line-height: 1.2;
-            min-height: 50px;
+        }
+        
+        /* Google Forms кнопка */
+        .google-form-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #4285f4, #34a853);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            border-bottom: 3px solid rgba(66, 133, 244, 0.6);
+        }
+        
+        .google-form-btn:hover, .google-form-btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+        }
+        
+        /* Информация для детей - стили */
+        .info-block {
+            background: rgba(255,215,0,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .info-block h3 {
+            color: #ffd700;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .info-block p {
+            color: #aaddff;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .feature-item {
+            background: rgba(65, 105, 225, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.3;
+        }
+        
+        .feature-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .step-list {
+            margin: 15px 0;
+        }
+        
+        .step-item {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .step-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #ffdd00;
+            font-weight: bold;
+        }
+        
+        .distribution-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .distribution-item {
             display: flex;
             align-items: center;
+            margin-bottom: 8px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            font-size: 13px;
         }
         
-        .info-container h2 {
-            color: #32cd32;
-            font-size: clamp(26px, 5.5vw, 34px);
-            margin-bottom: 30px;
-            text-shadow: 0 0 15px rgba(50, 205, 50, 0.5);
+        /* Для очень маленьких экранов */
+        @media (max-width: 350px) {
+            .header h1 { font-size: 18px; }
+            .header p { font-size: 12px; }
+            .control-btn { font-size: 14px; padding: 12px; }
+            .value-options { grid-template-columns: 1fr; }
+            .modal-container { padding: 15px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .info-block { padding: 12px; }
         }
         
-        .info-container h3 {
-            color: #ffd700;
-            margin: 25px 0 15px 0;
-            font-size: clamp(20px, 4.5vw, 25px);
+        /* Для планшетов */
+        @media (min-width: 768px) {
+            .header { top: 25px; padding: 20px; max-width: 700px; }
+            .header h1 { font-size: 24px; }
+            .header p { font-size: 16px; }
+            .controls { flex-direction: row; bottom: 25px; max-width: 700px; }
+            .control-btn { min-width: 200px; font-size: 16px; }
+            .modal-container { max-width: 600px; padding: 25px; }
         }
         
-        .info-container p,
-        .info-container li {
-            color: #aaddff;
-            font-size: clamp(15px, 3vw, 18px);
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-        
-        .info-container ul {
-            margin-left: 25px;
-            margin-bottom: 25px;
-        }
-        
-        .info-container li {
-            margin-bottom: 10px;
-        }
-        
+        /* Анимации */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -546,196 +541,19 @@
             animation: fadeIn 0.3s ease-out;
         }
         
-        .distribution-list {
-            max-height: 320px;
-            overflow-y: auto;
-            padding-right: 12px;
-        }
-        
-        .distribution-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            font-size: clamp(14px, 2.5vw, 16px);
-        }
-        
-        /* Скрытые элементы для синхронизации (только для администратора) */
-        .admin-panel {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            z-index: 9999;
-            display: none;
-        }
-        
-        .admin-btn {
-            background: rgba(255, 0, 0, 0.3);
-            color: white;
-            border: 1px solid red;
-            padding: 8px 12px;
-            border-radius: 5px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        
-        @media (max-width: 480px) {
-            .controls {
-                flex-direction: column;
-                gap: 10px;
-                width: 94%;
-                padding: 15px;
-                bottom: 15px;
-            }
-            
-            .control-btn {
-                min-width: 100%;
-                padding: 18px 20px;
-                font-size: 16px;
-                border-radius: 14px;
-            }
-            
-            .value-options {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            
-            .header {
-                padding: 15px;
-                width: 94%;
-                border-radius: 12px;
-                top: 15px;
-            }
-            
-            .modal-container {
-                padding: 20px;
-                border-radius: 18px;
-                max-height: 80vh;
-            }
-            
-            .close-btn {
-                width: 44px;
-                height: 44px;
-                font-size: 24px;
-            }
-            
-            .loading {
-                padding: 20px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .stat-card {
-                padding: 18px;
-            }
-            
-            .submit-btn {
-                padding: 20px;
-                font-size: 18px;
-            }
-        }
-        
-        @media (min-width: 481px) and (max-width: 768px) {
-            .controls {
-                gap: 15px;
-                padding: 18px;
-            }
-            
-            .control-btn {
-                min-width: 200px;
-                font-size: 17px;
-                padding: 18px 25px;
-            }
-            
-            .value-options {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 18px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-        }
-        
-        @media (max-height: 600px) and (orientation: landscape) {
-            .header {
-                top: 10px;
-                padding: 10px;
-                max-width: 85vw;
-            }
-            
-            .controls {
-                bottom: 10px;
-                padding: 12px;
-                max-width: 95vw;
-            }
-            
-            .control-btn {
-                padding: 12px 16px;
-                font-size: 14px;
-                min-width: 180px;
-            }
-            
-            .loading {
-                padding: 15px;
-                font-size: 16px;
-            }
-            
-            .modal-container {
-                max-height: 75vh;
-                padding: 15px;
-            }
-            
-            .close-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 22px;
-            }
-        }
-        
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #000;
-            }
-        }
-        
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #ffd700, #ff8c00);
-            border-radius: 4px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #ffed4e, #ffaa33);
-        }
+        /* Скроллбар */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(45deg, #ffd700, #ff8c00); border-radius: 3px; }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
-    <div class="cursor-glow" id="cursorGlow"></div>
     
     <div class="ui">
         <div class="loading" id="loading">
             🚀 Загружаем Галактику Ценностей...
-            <div style="font-size: clamp(15px, 3.5vw, 18px); margin-top: 20px; color: #aaddff;">
+            <div style="font-size: 14px; margin-top: 15px; color: #aaddff;">
                 Проект "Мой мир ценностей"<br>
                 Гимназия им. Е.М. Примакова
             </div>
@@ -743,13 +561,13 @@
         
         <div class="header">
             <h1>✨ ГАЛАКТИКА ЦЕННОСТЕЙ ✨</h1>
-            <p>Интерактивный музей "Мой мир ценностей"<br>
-            Наведи на звезду, чтобы узнать что ценно для ученика Гимназии им. Е.М. Примакова</p>
+            <p>Музей "Мой мир ценностей"<br>
+            Наведи на звезду — узнай ценности учеников</p>
         </div>
         
         <div class="controls">
-            <button class="control-btn" onclick="openForm()">⭐ ДОБАВИТЬ СВОЮ ЗВЕЗДУ</button>
-            <button class="control-btn stats-btn" onclick="openStats()">📊 МОЯ СТАТИСТИКА</button>
+            <button class="control-btn" onclick="openForm()">⭐ ДОБАВИТЬ ЗВЕЗДУ</button>
+            <button class="control-btn stats-btn" onclick="openStats()">📊 СТАТИСТИКА</button>
             <button class="control-btn info-btn" onclick="openInfo()">ℹ️ О ПРОЕКТЕ</button>
         </div>
         
@@ -765,12 +583,12 @@
             </div>
             <form id="starForm">
                 <div class="form-group">
-                    <label for="studentName" class="required">1. Как тебя зовут?</label>
-                    <input type="text" id="studentName" required placeholder="Введи своё имя и фамилию">
+                    <label for="studentName">1. Как тебя зовут?</label>
+                    <input type="text" id="studentName" required placeholder="Имя и фамилия">
                 </div>
                 
                 <div class="form-group">
-                    <label for="studentClass" class="required">2. Из какого ты класса?</label>
+                    <label for="studentClass">2. Из какого ты класса?</label>
                     <select id="studentClass" required>
                         <option value="">Выбери класс</option>
                         <option value="1">1 класс</option>
@@ -788,26 +606,25 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="required">3. Какая ценность для тебя самая важная?</label>
+                    <label>3. Какая ценность для тебя важна?</label>
                     <div class="value-options" id="valueOptions">
                         <div class="value-option" data-value="Уважение">Уважение</div>
                         <div class="value-option" data-value="Ответственность">Ответственность</div>
                         <div class="value-option" data-value="Дружба">Дружба</div>
                         <div class="value-option" data-value="Справедливость">Справедливость</div>
                         <div class="value-option" data-value="Спорт">Спорт</div>
-                        <div class="value-option" data-value="Свобода">Свобода</div>
-                        <div class="value-option" id="otherOption">Другой вариант</div>
+                        <div class="value-option" id="otherOption">Другое</div>
                     </div>
-                    <input type="text" id="customValue" placeholder="Введи свою ценность" style="display: none; margin-top: 15px;">
+                    <input type="text" id="customValue" placeholder="Твоя ценность" style="display: none; margin-top: 10px;">
                     <input type="hidden" id="selectedValue" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="valueReason" class="required">4. Почему эта ценность важна для тебя?</label>
-                    <textarea id="valueReason" required placeholder="Объясни, почему ты выбрал(а) именно эту ценность. Что она для тебя значит?"></textarea>
+                    <label for="valueReason">4. Почему это важно?</label>
+                    <textarea id="valueReason" required placeholder="Расскажи, почему ты выбрал(а) эту ценность"></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">✨ СОЗДАТЬ СВОЮ ЗВЕЗДУ</button>
+                <button type="submit" class="submit-btn">✨ СОЗДАТЬ ЗВЕЗДУ</button>
             </form>
         </div>
     </div>
@@ -816,7 +633,7 @@
     <div class="overlay" id="statsOverlay">
         <div class="modal-container">
             <div class="modal-header">
-                <h2>📊 МОЯ СТАТИСТИКА ЦЕННОСТЕЙ</h2>
+                <h2>📊 СТАТИСТИКА ЦЕННОСТЕЙ</h2>
                 <button class="close-btn" onclick="closeStats()">×</button>
             </div>
             <div class="stats-grid">
@@ -829,133 +646,149 @@
                     <div class="stat-value" id="myClass">-</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Моя главная ценность</h3>
+                    <h3>Главная ценность</h3>
                     <div class="stat-value" id="myMainValue">-</div>
                 </div>
                 <div class="stat-card">
-                    <h3>Мой первый вклад</h3>
-                    <div class="stat-value" id="firstContribution">-</div>
+                    <h3>Популярная</h3>
+                    <div class="stat-value" id="popularValue">-</div>
                 </div>
             </div>
             <div class="stat-card">
                 <h3>Мои ценности</h3>
-                <div class="distribution-list" id="myValuesDistribution">Данные загружаются...</div>
+                <div class="distribution-list" id="myValuesDistribution">У тебя пока нет звёзд</div>
             </div>
-            <div class="stat-card">
-                <h3>Как добавить в общую галактику?</h3>
-                <div style="padding: 15px; color: #aaddff; font-size: clamp(15px, 3vw, 17px); line-height: 1.5;">
-                    <p>📝 Чтобы твоя звезда попала в <strong>общую галактику</strong> всей гимназии, заполни также:</p>
-                    <p style="margin: 15px 0; text-align: center;">
-                        <a href="#" onclick="openGoogleForm(); return false;" style="color: #ffdd00; text-decoration: none; font-weight: bold; font-size: clamp(16px, 3.5vw, 20px);">
-                            📋 GOOGLE ФОРМУ ДЛЯ КЛАССА
-                        </a>
-                    </p>
-                    <p>🌟 <strong>В общей галактике</strong> ты увидишь звёзды всех учеников гимназии!</p>
-                    <p>✨ <strong>В личной галактике</strong> ты видишь только свои звёзды для самопознания.</p>
-                </div>
+            
+            <!-- КНОПКА GOOGLE FORMS -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1" 
+               target="_blank" 
+               class="google-form-btn">
+                📋 ЗАПОЛНИТЬ GOOGLE ФОРМУ (для общей галактики)
+            </a>
+            
+            <div style="margin-top: 15px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                <p style="color: #ffd700; font-size: 13px; line-height: 1.4;">
+                    <strong>🌟 Две галактики:</strong><br>
+                    1. <strong>Личная</strong> — твои звёзды (здесь)<br>
+                    2. <strong>Общая</strong> — звёзды всей гимназии (Google Форма)
+                </p>
             </div>
         </div>
     </div>
 
-    <!-- Информация о проекте -->
+    <!-- Информация о проекте (ДЕТСКАЯ ВЕРСИЯ) -->
     <div class="overlay" id="infoOverlay">
         <div class="modal-container">
             <div class="modal-header">
-                <h2>ℹ️ О ПРОЕКТЕ "МОЙ МИР ЦЕННОСТЕЙ"</h2>
+                <h2>ℹ️ О ПРОЕКТЕ</h2>
                 <button class="close-btn" onclick="closeInfo()">×</button>
             </div>
             
-            <h3>✨ Цифровая галактика ценностей</h3>
-            <p>Перед тобой интерактивный музей нашей гимназии, где каждый ответ превращается в 3D-звезду 💫</p>
+            <!-- БЛОК 1: Что это? -->
+            <div class="info-block">
+                <h3>✨ ЧТО ЭТО?</h3>
+                <p><strong>Галактика ценностей гимназиста!</strong><br>
+                Каждая звезда = что-то важное для ученика.</p>
+            </div>
             
-            <p><strong>Твоё мнение → анимированная звезда в космосе ⭐️</strong></p>
-            <p>Добавляй свою звезду и становись частью истории гимназии!</p>
+            <!-- БЛОК 2: Зачем? -->
+            <h3>🎯 ЗАЧЕМ ЭТО?</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">👀</span>
+                    Узнать, что важно для друзей
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">💬</span>
+                    Поделиться своим мнением
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🌟</span>
+                    Увидеть картину ценностей всей гимназии
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🎮</span>
+                    Участвовать в общем проекте
+                </div>
+            </div>
             
-            <h3>🎯 Цель проекта</h3>
-            <p>«Мой мир ценностей» — это виртуальное пространство, которое визуализирует личные ценности учеников нашей гимназии. Каждая звезда в этой галактике — это голос отдельного человека, его мысли и убеждения.</p>
-            
-            <h3>👤 Автор проекта</h3>
-            <p>Левченко Матвей Вячеславович, 6 А класс</p>
-            
-            <h3>👨‍🏫 Научный руководитель</h3>
-            <p>Зыков Михаил Анатольевич</p>
+            <!-- БЛОК 3: Кто сделал? -->
+            <div class="info-block">
+                <h3>👤 КТО СДЕЛАЛ?</h3>
+                <p><strong>Матвей Левченко</strong>, 6 А класс<br>
+                <small>Куратор Зыков Михаил Анатольевич</small></p>
+            </div>
             
             <h3>🏫 Гимназия им. Е.М. Примакова</h3>
             
-            <h3>💡 Как пользоваться</h3>
-            <ul>
-                <li><strong>Личная галактика:</strong> Нажми "Добавить свою звезду" для самопознания</li>
-                <li><strong>Общая галактика:</strong> Заполни Google Форму, чтобы участвовать в общем проекте класса</li>
-                <li>Наведи курсор на любую звезду, чтобы узнать о ценностях</li>
-                <li>Изучи статистику, чтобы увидеть свои предпочтения</li>
-                <li>Поделись проектом с друзьями и одноклассниками</li>
-            </ul>
-            
-            <h3>📊 Две галактики</h3>
-            <p><strong>1. Личная галактика:</strong> Только твои звёзды. Для рефлексии и самопознания.</p>
-            <p><strong>2. Общая галактика:</strong> Звёзды всей гимназии. Для диалога и исследования ценностей сообщества.</p>
-            
-            <div style="margin-top: 30px; padding: 20px; background: rgba(255, 215, 0, 0.1); border-radius: 12px; border-left: 4px solid #ffd700;">
-                <p style="color: #ffd700; font-weight: bold; font-size: clamp(16px, 3.5vw, 18px); line-height: 1.5;">
-                    "Это инструмент для диалога и самопознания всего нашего сообщества гимназистов. Здесь каждый голос важен, каждая ценность имеет значение."
-                </p>
-                <p style="color: #aaddff; font-size: clamp(14px, 3vw, 16px); margin-top: 12px;">
-                    Левченко Матвей, автор проекта, 6 А класс
-                </p>
+            <!-- БЛОК 4: Как играть? -->
+            <h3>🎮 КАК ИГРАТЬ?</h3>
+            <div class="step-list">
+                <div class="step-item">
+                    <strong>Добавить звезду</strong> — расскажи, что для тебя важно
+                </div>
+                <div class="step-item">
+                    <strong>Исследовать галактику</strong> — наведи на звезду, узнай мнение друга
+                </div>
+                <div class="step-item">
+                    <strong>Посмотреть статистику</strong> — узнай, какие ценности популярны
+                </div>
+                <div class="step-item">
+                    <strong>Заполнить Google Форму</strong> — стань частью истории гимназии!
+                </div>
             </div>
             
-            <div style="margin-top: 30px; padding: 20px; background: rgba(65, 105, 225, 0.1); border-radius: 12px; border-left: 4px solid #4169e1;">
-                <h4 style="color: #aaddff; margin-bottom: 10px;">📝 Для участия в общей галактике:</h4>
-                <p style="color: #aaddff; font-size: clamp(14px, 3vw, 16px);">
-                    Заполни Google Форму, которую предоставит классный руководитель. 
-                    После проверки твоя звезда появится в общей галактике всей гимназии!
+            <!-- БЛОК 5: Две галактики -->
+            <div class="info-block">
+                <h3>🌟 ДВЕ ГАЛАКТИКИ</h3>
+                <p><strong>Личная</strong> — твои звёзды (только ты видишь)<br>
+                <strong>Общая</strong> — звёзды всей гимназии (после Google Формы)</p>
+            </div>
+            
+            <!-- КНОПКА GOOGLE FORMS -->
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1" 
+               target="_blank" 
+               class="google-form-btn">
+                📋 ПЕРЕЙТИ К GOOGLE ФОРМЕ
+            </a>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(100, 200, 255, 0.1); border-radius: 10px;">
+                <p style="color: #66ccff; font-size: 14px; line-height: 1.4;">
+                    💡 <strong>Совет:</strong> Сначала добавь свою звезду здесь,<br>
+                    потом заполни Google Форму!
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Скрытая панель администратора -->
-    <div class="admin-panel" id="adminPanel">
-        <button class="admin-btn" onclick="showAdminPanel()">Админ</button>
-    </div>
-
     <script>
-        // Конфигурация
+        // КОНФИГУРАЦИЯ
         const CONFIG = {
-            INITIAL_STARS: 50,
+            INITIAL_STARS: 30,
             MAX_STAR_SIZE: 6,
             MIN_STAR_SIZE: 2,
-            HOVER_SCALE: 1.5,
-            HOVER_GLOW_INTENSITY: 2.0,
-            BACKGROUND_STARS: 400,
-            TWINKLE_SPEED: 0.02,
-            TWINKLE_AMPLITUDE: 0.3,
+            BACKGROUND_STARS: 150,
+            GOOGLE_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1",
             VALUE_COLORS: {
                 'Уважение': '#ff6666',
                 'Ответственность': '#6699ff',
                 'Дружба': '#ff9900',
                 'Справедливость': '#32cd32',
                 'Спорт': '#9370db',
-                'Свобода': '#ff66ff',
                 'Другой': '#ffdd00'
-            },
-            GOOGLE_FORM_URL: '' // Укажите ссылку на Google Форму
+            }
         };
         
-        // Элементы DOM
+        // Элементы
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const tooltip = document.getElementById('tooltip');
-        const cursorGlow = document.getElementById('cursorGlow');
         
         // Переменные
         let stars = [];
         let userStars = JSON.parse(localStorage.getItem('gymnasiumValues')) || [];
         let particles = [];
-        let mouseX = 0;
-        let mouseY = 0;
         let hoveredStar = null;
-        let animationId = null;
         let devicePixelRatio = window.devicePixelRatio || 1;
         
         // Инициализация
@@ -965,31 +798,26 @@
             createBackgroundStars(CONFIG.BACKGROUND_STARS);
             loadUserStars();
             
-            // Показываем загрузку
+            // Скрываем загрузку
             setTimeout(() => {
-                const loading = document.getElementById('loading');
-                loading.style.opacity = '0';
-                setTimeout(() => {
-                    loading.style.display = 'none';
-                    animate();
-                }, 300);
+                document.getElementById('loading').style.display = 'none';
+                animate();
             }, 1500);
             
-            // Обработчики событий
+            // События
             window.addEventListener('resize', setupCanvas);
             canvas.addEventListener('mousemove', handleMouseMove);
             canvas.addEventListener('mouseleave', handleMouseLeave);
             canvas.addEventListener('click', handleStarClick);
             
+            // Для телефонов
             if ('ontouchstart' in window) {
                 canvas.addEventListener('touchstart', handleTouch, { passive: true });
                 canvas.addEventListener('touchmove', handleTouch, { passive: true });
-                optimizeForMobile();
             }
             
             setupForm();
             updateStats();
-            checkForAutoImport();
         }
         
         function setupCanvas() {
@@ -1001,40 +829,33 @@
             canvas.style.width = width + 'px';
             canvas.style.height = height + 'px';
             
-            ctx.scale(devicePixelRatio, devicePixelRatio);
+            if (devicePixelRatio > 1) {
+                ctx.scale(devicePixelRatio, devicePixelRatio);
+            }
         }
         
         function createStars(count) {
+            const width = canvas.width / devicePixelRatio;
+            const height = canvas.height / devicePixelRatio;
+            
             for (let i = 0; i < count; i++) {
                 const size = CONFIG.MIN_STAR_SIZE + Math.random() * (CONFIG.MAX_STAR_SIZE - CONFIG.MIN_STAR_SIZE);
-                const x = Math.random() * canvas.width / devicePixelRatio;
-                const y = Math.random() * canvas.height / devicePixelRatio;
                 
                 stars.push({
                     id: i,
-                    x: x,
-                    y: y,
-                    originalX: x,
-                    originalY: y,
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    originalX: Math.random() * width,
+                    originalY: Math.random() * height,
                     baseSize: size,
                     currentSize: size,
-                    targetSize: size,
                     color: getRandomStarColor(),
-                    speed: 0.02 + Math.random() * 0.1,
+                    speed: 0.02 + Math.random() * 0.05,
                     angle: Math.random() * Math.PI * 2,
-                    rotation: 0,
-                    rotationSpeed: (Math.random() - 0.5) * 0.01,
                     pulse: Math.random() * Math.PI * 2,
                     pulseSpeed: 0.005 + Math.random() * 0.01,
                     glow: 0,
-                    targetGlow: 0,
-                    hoverScale: 1,
-                    targetHoverScale: 1,
-                    isHovered: false,
-                    distanceToMouse: Infinity,
-                    lastClickTime: 0,
-                    twinkle: Math.random() * Math.PI * 2,
-                    twinkleSpeed: 0.005 + Math.random() * 0.01
+                    isHovered: false
                 });
             }
         }
@@ -1045,153 +866,73 @@
         }
         
         function loadUserStars() {
-            // Проверяем, есть ли уже звезда Матвея в localStorage
-            const hasMatveyStar = userStars.some(star => star.name === "Матвей Левченко");
-            
-            // Если звезды Матвея нет в localStorage, добавляем её
-            if (!hasMatveyStar) {
-                const matveyStarData = {
-                    name: "Матвей Левченко",
-                    class: "6",
-                    value: "Справедливость",
-                    reason: "Справедливость создаёт гармонию в обществе и позволяет каждому чувствовать себя защищённым",
-                    timestamp: new Date().toISOString(),
-                    source: 'system',
-                    isMatvey: true
-                };
-                
-                userStars.unshift(matveyStarData); // Добавляем в начало
-                localStorage.setItem('gymnasiumValues', JSON.stringify(userStars));
-            }
-            
-            // Загружаем все звёзды из localStorage
-            userStars.forEach((starData, index) => {
-                // Если это звезда Матвея, помещаем её в центр
-                if (starData.name === "Матвей Левченко") {
-                    addMatveyStar(starData);
-                } else {
-                    // Остальные звёзды распределяем равномерно
-                    addStarToGalaxy(starData, 2000 + index);
-                }
-            });
-        }
-        
-        // Функция для добавления звезды Матвея в центр
-        function addMatveyStar(starData) {
             const width = canvas.width / devicePixelRatio;
             const height = canvas.height / devicePixelRatio;
-            const centerX = width / 2;
-            const centerY = height / 2;
             
-            // Удаляем старые звезды Матвея, если они есть
+            // Удаляем старые звёзды Матвея
             stars = stars.filter(star => !star.isMatvey);
             
+            // СОЗДАЁМ ЗВЕЗДУ МАТВЕЯ В ЦЕНТРЕ
             stars.push({
                 id: 999,
-                x: centerX,
-                y: centerY,
-                originalX: centerX,
-                originalY: centerY,
-                baseSize: 6,
-                currentSize: 6,
-                targetSize: 6,
-                color: CONFIG.VALUE_COLORS[starData.value] || CONFIG.VALUE_COLORS['Справедливость'],
-                name: starData.name,
+                x: width / 2,
+                y: height / 2,
+                originalX: width / 2,
+                originalY: height / 2,
+                baseSize: 7,
+                currentSize: 7,
+                color: CONFIG.VALUE_COLORS['Уважение'],
+                name: "Матвей Левченко",
                 class: "6 класс",
-                value: starData.value,
-                reason: starData.reason,
-                speed: 0.02,
+                value: "Уважение",
+                reason: "Уважение это фундамент на котором держится доверие и дружба",
+                speed: 0.01,
                 angle: Math.random() * Math.PI * 2,
-                rotation: 0,
-                rotationSpeed: 0.005,
                 pulse: Math.random() * Math.PI * 2,
-                pulseSpeed: 0.005,
-                glow: 1.5,
-                targetGlow: 1.5,
-                hoverScale: 1,
-                targetHoverScale: 1,
+                pulseSpeed: 0.003,
+                glow: 2.0,
                 isHovered: false,
                 isUserStar: true,
                 isMatvey: true,
-                distanceToMouse: Infinity,
-                lastClickTime: 0,
-                twinkle: Math.random() * Math.PI * 2,
-                twinkleSpeed: 0.005
+                rotation: 0,
+                rotationSpeed: 0.001 + Math.random() * 0.002
             });
+            
+            // Добавляем звёзды пользователей
+            userStars.forEach((starData, index) => {
+                if (starData.name !== "Матвей Левченко") {
+                    addStarToGalaxy(starData, 1000 + index);
+                }
+            });
+            
+            // Сохраняем звезду Матвея в localStorage
+            const hasMatveyStar = userStars.some(star => star.name === "Матвей Левченко");
+            if (!hasMatveyStar) {
+                userStars.unshift({
+                    name: "Матвей Левченко",
+                    class: "6",
+                    value: "Уважение",
+                    reason: "Уважение это фундамент на котором держится доверие и дружба",
+                    timestamp: new Date().toISOString(),
+                    isMatvey: true
+                });
+                localStorage.setItem('gymnasiumValues', JSON.stringify(userStars));
+            }
         }
         
-        // УЛУЧШЕННАЯ ФУНКЦИЯ - гармоничное распределение звёзд
         function addStarToGalaxy(starData, id) {
-            // Пропускаем звезду Матвея, она уже добавлена
-            if (starData.name === "Матвей Левченко") return;
-            
-            const size = CONFIG.MIN_STAR_SIZE + Math.random() * (CONFIG.MAX_STAR_SIZE - CONFIG.MIN_STAR_SIZE);
             const width = canvas.width / devicePixelRatio;
             const height = canvas.height / devicePixelRatio;
+            const size = 4 + Math.random() * 3;
             
-            let attempts = 0;
-            let x, y;
-            let positionFound = false;
+            // Распределяем вокруг центра
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = 100 + Math.random() * 200;
+            const angle = Math.random() * Math.PI * 2;
             
-            // Пытаемся найти хорошую позицию
-            while (!positionFound && attempts < 100) {
-                // Равномерное распределение по всему экрану с учётом UI элементов
-                const margin = 150; // Отступ от краёв для UI
-                const safeAreaX = width - 2 * margin;
-                const safeAreaY = height - 2 * margin;
-                
-                x = margin + Math.random() * safeAreaX;
-                y = margin + Math.random() * safeAreaY;
-                
-                // Проверяем, чтобы не попасть на заголовок (верхняя часть)
-                const headerArea = 200;
-                const controlsArea = height - 250;
-                
-                // Если попадаем в зону заголовка или кнопок, пробуем ещё
-                if (y < headerArea || y > controlsArea) {
-                    attempts++;
-                    continue;
-                }
-                
-                // Проверяем расстояние до других пользовательских звёзд
-                let tooClose = false;
-                const minDistance = 80; // Минимальное расстояние между звёздами
-                
-                for (let star of stars) {
-                    if (star.isUserStar && !star.isMatvey) { // Не проверяем расстояние до звезды Матвея
-                        const dx = x - star.x;
-                        const dy = y - star.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < minDistance) {
-                            tooClose = true;
-                            break;
-                        }
-                    }
-                }
-                
-                if (!tooClose) {
-                    positionFound = true;
-                }
-                
-                attempts++;
-            }
-            
-            // Если не нашли хорошую позицию, ставим случайно (но не в самом центре)
-            if (!positionFound) {
-                const centerX = width / 2;
-                const centerY = height / 2;
-                const avoidRadius = 200; // Не ставим слишком близко к центру
-                
-                do {
-                    x = Math.random() * width;
-                    y = Math.random() * height;
-                } while (
-                    Math.abs(x - centerX) < avoidRadius && 
-                    Math.abs(y - centerY) < avoidRadius &&
-                    attempts++ < 50
-                );
-            }
+            const x = centerX + Math.cos(angle) * radius;
+            const y = centerY + Math.sin(angle) * radius;
             
             stars.push({
                 id: id,
@@ -1200,33 +941,23 @@
                 originalX: x,
                 originalY: y,
                 baseSize: size,
-                currentSize: 0,
-                targetSize: size,
+                currentSize: size,
                 color: CONFIG.VALUE_COLORS[starData.value] || CONFIG.VALUE_COLORS['Другой'],
                 name: starData.name,
                 class: starData.class + ' класс',
                 value: starData.value,
                 reason: starData.reason,
-                speed: 0.02 + Math.random() * 0.1,
+                speed: 0.02 + Math.random() * 0.05,
                 angle: Math.random() * Math.PI * 2,
-                rotation: 0,
-                rotationSpeed: (Math.random() - 0.5) * 0.01,
                 pulse: Math.random() * Math.PI * 2,
                 pulseSpeed: 0.005 + Math.random() * 0.01,
-                glow: 0,
-                targetGlow: 1.0,
-                hoverScale: 1,
-                targetHoverScale: 1,
+                glow: 1.0,
                 isHovered: false,
                 isUserStar: true,
                 isMatvey: false,
-                distanceToMouse: Infinity,
-                lastClickTime: 0,
-                twinkle: Math.random() * Math.PI * 2,
-                twinkleSpeed: 0.005 + Math.random() * 0.01
+                rotation: Math.random() * Math.PI * 2,
+                rotationSpeed: 0.0005 + Math.random() * 0.001
             });
-            
-            createAppearanceEffect({ x, y, color: CONFIG.VALUE_COLORS[starData.value] || CONFIG.VALUE_COLORS['Другой'] });
         }
         
         function createBackgroundStars(count) {
@@ -1235,27 +966,20 @@
                     x: Math.random() * canvas.width / devicePixelRatio,
                     y: Math.random() * canvas.height / devicePixelRatio,
                     size: Math.random() * 1.5,
-                    brightness: 0.1 + Math.random() * 0.5,
-                    speed: 0.01 + Math.random() * 0.05,
-                    twinkle: Math.random() * Math.PI * 2,
-                    twinkleSpeed: 0.003 + Math.random() * 0.007
+                    brightness: 0.1 + Math.random() * 0.6,
+                    speed: 0.01 + Math.random() * 0.03
                 });
             }
         }
         
         function handleMouseMove(event) {
             const rect = canvas.getBoundingClientRect();
-            mouseX = (event.clientX - rect.left) * (canvas.width / devicePixelRatio / rect.width);
-            mouseY = (event.clientY - rect.top) * (canvas.height / devicePixelRatio / rect.height);
-            
-            cursorGlow.style.left = (event.clientX - 40) + 'px';
-            cursorGlow.style.top = (event.clientY - 40) + 'px';
-            cursorGlow.style.opacity = '0.7';
+            const x = (event.clientX - rect.left) * (canvas.width / devicePixelRatio / rect.width);
+            const y = (event.clientY - rect.top) * (canvas.height / devicePixelRatio / rect.height);
             
             if (hoveredStar) {
                 hoveredStar.isHovered = false;
-                hoveredStar.targetHoverScale = 1;
-                hoveredStar.targetGlow = hoveredStar.isUserStar ? (hoveredStar.isMatvey ? 1.5 : 1.0) : 0;
+                hoveredStar.glow = hoveredStar.isUserStar ? (hoveredStar.isMatvey ? 2.0 : 1.0) : 0;
                 hoveredStar = null;
             }
             
@@ -1264,14 +988,11 @@
             let closestStar = null;
             let minDistance = Infinity;
             
-            for (let i = 0; i < stars.length; i++) {
-                const star = stars[i];
-                const dx = mouseX - star.x;
-                const dy = mouseY - star.y;
+            for (let star of stars) {
+                const dx = x - star.x;
+                const dy = y - star.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const hoverRadius = star.currentSize * 20;
-                
-                star.distanceToMouse = distance;
+                const hoverRadius = star.currentSize * 15;
                 
                 if (distance < hoverRadius && distance < minDistance) {
                     minDistance = distance;
@@ -1281,18 +1002,10 @@
             
             if (closestStar) {
                 closestStar.isHovered = true;
-                closestStar.targetHoverScale = CONFIG.HOVER_SCALE;
-                closestStar.targetGlow = CONFIG.HOVER_GLOW_INTENSITY;
+                closestStar.glow = closestStar.isMatvey ? 3.0 : 2.0;
                 hoveredStar = closestStar;
                 
                 showTooltip(closestStar, event);
-                
-                cursorGlow.style.opacity = '1';
-                cursorGlow.style.background = `radial-gradient(circle, ${closestStar.color}90 0%, transparent 70%)`;
-                cursorGlow.style.width = '100px';
-                cursorGlow.style.height = '100px';
-                cursorGlow.style.left = (event.clientX - 50) + 'px';
-                cursorGlow.style.top = (event.clientY - 50) + 'px';
             }
         }
         
@@ -1303,78 +1016,41 @@
                 const x = (touch.clientX - rect.left) * (canvas.width / devicePixelRatio / rect.width);
                 const y = (touch.clientY - rect.top) * (canvas.height / devicePixelRatio / rect.height);
                 
-                handleTouchMove(x, y, touch);
-            }
-        }
-        
-        function handleTouchMove(x, y, touch) {
-            let closestStar = null;
-            let minDistance = Infinity;
-            
-            for (let i = 0; i < stars.length; i++) {
-                const star = stars[i];
-                const dx = x - star.x;
-                const dy = y - star.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                const hoverRadius = star.currentSize * 25;
+                let closestStar = null;
+                let minDistance = Infinity;
                 
-                if (distance < hoverRadius && distance < minDistance) {
-                    minDistance = distance;
-                    closestStar = star;
+                for (let star of stars) {
+                    const dx = x - star.x;
+                    const dy = y - star.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const hoverRadius = star.currentSize * 20;
+                    
+                    if (distance < hoverRadius && distance < minDistance) {
+                        minDistance = distance;
+                        closestStar = star;
+                    }
+                }
+                
+                if (closestStar && closestStar.isUserStar) {
+                    showTooltip(closestStar, touch);
+                    setTimeout(() => tooltip.style.opacity = '0', 2000);
                 }
             }
-            
-            if (closestStar && closestStar.isUserStar) {
-                showMobileTooltip(closestStar, touch);
-            }
-        }
-        
-        function showMobileTooltip(star, touch) {
-            tooltip.innerHTML = `
-                <div class="star-name">⭐ ${star.name}</div>
-                <div class="star-info"><strong>Класс:</strong> ${star.class}</div>
-                <div class="star-info"><strong>Ценность:</strong> ${star.value}</div>
-                <div class="star-info"><strong>Почему важно:</strong> ${star.reason}</div>
-                ${star.isMatvey ? '<div class="star-info" style="color:#ffd700; margin-top:10px;">★ Автор проекта</div>' : ''}
-            `;
-            
-            let x = touch.clientX;
-            let y = touch.clientY - 200;
-            
-            if (y < 50) y = touch.clientY + 50;
-            if (x + tooltip.offsetWidth > window.innerWidth) x = window.innerWidth - tooltip.offsetWidth - 20;
-            if (x < 20) x = 20;
-            
-            tooltip.style.left = x + 'px';
-            tooltip.style.top = y + 'px';
-            tooltip.style.opacity = '1';
-            
-            setTimeout(() => tooltip.style.opacity = '0', 3000);
         }
         
         function handleMouseLeave() {
             if (hoveredStar) {
                 hoveredStar.isHovered = false;
-                hoveredStar.targetHoverScale = 1;
-                hoveredStar.targetGlow = hoveredStar.isUserStar ? (hoveredStar.isMatvey ? 1.5 : 1.0) : 0;
+                hoveredStar.glow = hoveredStar.isUserStar ? (hoveredStar.isMatvey ? 2.0 : 1.0) : 0;
                 hoveredStar = null;
             }
             tooltip.style.opacity = '0';
-            cursorGlow.style.opacity = '0';
         }
         
-        function handleStarClick(event) {
+        function handleStarClick() {
             if (hoveredStar && hoveredStar.isUserStar) {
-                const now = Date.now();
-                if (now - hoveredStar.lastClickTime < 300) {
-                    createExplosion(hoveredStar);
-                } else {
-                    hoveredStar.targetGlow = CONFIG.HOVER_GLOW_INTENSITY * 2;
-                    setTimeout(() => {
-                        if (hoveredStar) hoveredStar.targetGlow = CONFIG.HOVER_GLOW_INTENSITY;
-                    }, 400);
-                }
-                hoveredStar.lastClickTime = now;
+                hoveredStar.glow = hoveredStar.isMatvey ? 4.0 : 3.0;
+                setTimeout(() => hoveredStar.glow = hoveredStar.isMatvey ? 2.0 : 1.0, 300);
             }
         }
         
@@ -1383,59 +1059,47 @@
                 <div class="star-name">⭐ ${star.name}</div>
                 <div class="star-info"><strong>Класс:</strong> ${star.class}</div>
                 <div class="star-info"><strong>Ценность:</strong> ${star.value}</div>
-                <div class="star-info"><strong>Почему важно:</strong> ${star.reason}</div>
-                ${star.isMatvey ? '<div class="star-info" style="color:#ffd700; margin-top:10px;">★ Автор проекта</div>' : ''}
+                <div class="star-info"><strong>Почему:</strong> ${star.reason}</div>
             ` : `
                 <div class="star-name">✨ Звезда галактики</div>
-                <div class="star-info">Нажми "Добавить свою звезду", чтобы поделиться своей ценностью!</div>
+                <div class="star-info">Нажми "Добавить свою звезду"!</div>
             `;
             
-            let x = event.clientX + 30;
-            let y = event.clientY + 30;
+            let x = event.clientX + 20;
+            let y = event.clientY + 20;
             
-            if (x + tooltip.offsetWidth > window.innerWidth) x = event.clientX - tooltip.offsetWidth - 30;
-            if (y + tooltip.offsetHeight > window.innerHeight) y = event.clientY - tooltip.offsetHeight - 30;
+            if (x + tooltip.offsetWidth > window.innerWidth) x = event.clientX - tooltip.offsetWidth - 20;
+            if (y + tooltip.offsetHeight > window.innerHeight) y = event.clientY - tooltip.offsetHeight - 20;
             
             tooltip.style.left = x + 'px';
             tooltip.style.top = y + 'px';
             tooltip.style.opacity = '1';
         }
         
+        // ⭐⭐⭐ ИСПРАВЛЕННАЯ ФУНКЦИЯ РИСОВАНИЯ ПЯТИКОНЕЧНОЙ ЗВЕЗДЫ ⭐⭐⭐
         function drawStar(star, time) {
-            star.twinkle += star.twinkleSpeed;
-            const twinkleFactor = 0.7 + Math.sin(star.twinkle) * 0.3 * CONFIG.TWINKLE_AMPLITUDE;
+            // Пульсация размера
+            star.pulse += star.pulseSpeed;
+            const pulseFactor = 0.8 + Math.sin(star.pulse) * 0.2;
+            const size = star.baseSize * pulseFactor;
             
-            const pulse = Math.sin(star.pulse) * 0.3 * twinkleFactor + 0.7;
-            const size = star.currentSize * pulse * star.hoverScale;
+            // Вращение звезды
+            star.rotation = star.rotation || 0;
+            star.rotationSpeed = star.rotationSpeed || 0.001;
+            star.rotation += star.rotationSpeed;
             
-            if (star.isUserStar) {
-                const specialGlowSize = size * (star.isMatvey ? 5 : 4); // Звезда Матвея светит ярче
-                const gradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, specialGlowSize);
-                gradient.addColorStop(0, star.color + 'ff');
-                gradient.addColorStop(0.4, star.color + 'aa');
+            // 1. Рисуем ПУЛЬСИРУЮЩЕЕ СВЕЧЕНИЕ вокруг звезды
+            if (star.glow > 0) {
+                const glowSize = size * (3 + star.glow * 2 + Math.sin(time * 0.5) * 0.5);
+                const gradient = ctx.createRadialGradient(
+                    star.x, star.y, 0,
+                    star.x, star.y, glowSize
+                );
+                
+                gradient.addColorStop(0, star.color + 'cc');
+                gradient.addColorStop(0.4, star.color + '88');
                 gradient.addColorStop(0.7, star.color + '44');
                 gradient.addColorStop(1, star.color + '00');
-                
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(star.x, star.y, specialGlowSize, 0, Math.PI * 2);
-                ctx.fill();
-            }
-            
-            if (star.glow > 0.1) {
-                const glowSize = size * (2 + star.glow * 1.5);
-                const gradient = ctx.createRadialGradient(star.x, star.y, 0, star.x, star.y, glowSize);
-                
-                if (star.isHovered) {
-                    gradient.addColorStop(0, star.color + 'ff');
-                    gradient.addColorStop(0.3, star.color + 'aa');
-                    gradient.addColorStop(0.6, star.color + '44');
-                    gradient.addColorStop(1, star.color + '00');
-                } else {
-                    gradient.addColorStop(0, star.color + 'cc');
-                    gradient.addColorStop(0.5, star.color + '44');
-                    gradient.addColorStop(1, star.color + '00');
-                }
                 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
@@ -1443,23 +1107,27 @@
                 ctx.fill();
             }
             
+            // 2. Рисуем ПЯТИКОНЕЧНУЮ ЗВЕЗДУ
             ctx.save();
             ctx.translate(star.x, star.y);
             ctx.rotate(star.rotation);
             
+            // Размеры для пятиконечной звезды
             const outerRadius = size;
             const innerRadius = size * 0.4;
             
+            // Градиент для звезды
             const starGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, outerRadius);
             starGradient.addColorStop(0, star.color);
-            starGradient.addColorStop(0.8, star.color);
-            starGradient.addColorStop(1, star.color + 'cc');
+            starGradient.addColorStop(0.7, star.color);
+            starGradient.addColorStop(1, star.color + 'aa');
             
             ctx.fillStyle = starGradient;
             ctx.beginPath();
             
+            // Рисуем пятиконечную звезду
             for (let i = 0; i < 10; i++) {
-                const angle = (Math.PI * i) / 5;
+                const angle = star.rotation + (i * Math.PI) / 5;
                 const radius = i % 2 === 0 ? outerRadius : innerRadius;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius;
@@ -1471,165 +1139,100 @@
             ctx.closePath();
             ctx.fill();
             
+            // Обводка звезды
             ctx.strokeStyle = '#ffffff';
-            ctx.lineWidth = 1.2;
+            ctx.lineWidth = 0.8;
             ctx.stroke();
             
-            ctx.fillStyle = star.isUserStar ? '#ffffff' : '#ffffaa';
+            // 3. Яркий центр звезды с вращающимся эффектом
+            ctx.fillStyle = star.isMatvey ? '#ffff88' : '#ffffff';
             ctx.beginPath();
-            ctx.arc(0, 0, size * 0.25, 0, Math.PI * 2);
+            ctx.arc(0, 0, size * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // 4. Вращающийся внутренний элемент
+            ctx.fillStyle = star.color;
+            ctx.beginPath();
+            ctx.arc(0, 0, size * 0.15, 0, Math.PI * 2);
             ctx.fill();
             
             ctx.restore();
-            
-            if (!('ontouchstart' in window) && star.isHovered && star.isUserStar) {
-                ctx.fillStyle = '#ffdd00';
-                ctx.font = `bold ${Math.max(14, size * 2)}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'bottom';
-                ctx.shadowColor = '#000';
-                ctx.shadowBlur = 4;
-                ctx.fillText(star.name, star.x, star.y - size - 5);
-                ctx.shadowBlur = 0;
-            }
-        }
-        
-        function createExplosion(star) {
-            for (let i = 0; i < 30; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = 1 + Math.random() * 2;
-                const size = 1 + Math.random() * 3;
-                
-                particles.push({
-                    x: star.x,
-                    y: star.y,
-                    size: size,
-                    color: star.color,
-                    brightness: 1,
-                    speed: speed,
-                    angle: angle,
-                    life: 1,
-                    decay: 0.02 + Math.random() * 0.02,
-                    type: 'explosion'
-                });
-            }
-        }
-        
-        function createAppearanceEffect(star) {
-            for (let i = 0; i < 15; i++) {
-                const angle = Math.random() * Math.PI * 2;
-                const speed = 0.5 + Math.random() * 1.5;
-                const size = 1 + Math.random() * 2;
-                
-                particles.push({
-                    x: star.x,
-                    y: star.y,
-                    size: size,
-                    color: star.color,
-                    brightness: 1,
-                    speed: speed,
-                    angle: angle,
-                    life: 1,
-                    decay: 0.03 + Math.random() * 0.02,
-                    type: 'appearance'
-                });
-            }
         }
         
         function drawBackgroundStars() {
             particles.forEach(p => {
-                p.twinkle += p.twinkleSpeed;
-                const brightness = p.brightness * (0.6 + Math.sin(p.twinkle) * 0.4);
-                
-                if (!p.type) {
-                    p.x -= p.speed;
-                    if (p.x < -10) {
-                        p.x = canvas.width / devicePixelRatio + 10;
-                        p.y = Math.random() * canvas.height / devicePixelRatio;
-                    }
-                } else if (p.type === 'explosion' || p.type === 'appearance') {
-                    p.x += Math.cos(p.angle) * p.speed;
-                    p.y += Math.sin(p.angle) * p.speed;
-                    p.life -= p.decay;
-                    p.brightness = p.life;
+                p.x -= p.speed;
+                if (p.x < -10) {
+                    p.x = canvas.width / devicePixelRatio + 10;
+                    p.y = Math.random() * canvas.height / devicePixelRatio;
                 }
                 
-                if (p.life > 0) {
-                    const alpha = brightness;
-                    if (p.type) {
-                        ctx.fillStyle = p.color + Math.floor(alpha * 255).toString(16).padStart(2, '0');
-                    } else {
-                        ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-                    }
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
+                // Мерцание
+                const twinkle = 0.6 + Math.sin(Date.now() * 0.001 + p.x * 0.01) * 0.4;
+                
+                ctx.fillStyle = `rgba(255, 255, 255, ${p.brightness * twinkle})`;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
             });
-            
-            particles = particles.filter(p => !p.type || p.life > 0);
         }
         
+        // Гармоничное движение звёзд
         function animate() {
-            animationId = requestAnimationFrame(animate);
-            
-            // Оптимизация для мобильных
-            if (window.innerWidth < 768) {
-                const now = Date.now();
-                if (now - (animate.lastTime || 0) < 1000 / 30) return;
-                animate.lastTime = now;
-            }
-            
-            ctx.clearRect(0, 0, canvas.width / devicePixelRatio, canvas.height / devicePixelRatio);
+            const width = canvas.width / devicePixelRatio;
+            const height = canvas.height / devicePixelRatio;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const time = Date.now() * 0.001;
             
             // Градиентный фон
-            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height / devicePixelRatio);
+            const gradient = ctx.createLinearGradient(0, 0, 0, height);
             gradient.addColorStop(0, '#000010');
-            gradient.addColorStop(1, '#0a001a');
+            gradient.addColorStop(0.5, '#0a0015');
+            gradient.addColorStop(1, '#05000a');
             ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width / devicePixelRatio, canvas.height / devicePixelRatio);
+            ctx.fillRect(0, 0, width, height);
             
             drawBackgroundStars();
             
-            const time = Date.now() * 0.001;
-            updateStars(time);
-        }
-        
-        function updateStars(time) {
-            for (let i = 0; i < stars.length; i++) {
-                const star = stars[i];
-                
-                star.currentSize += (star.targetSize - star.currentSize) * 0.1;
-                star.hoverScale += (star.targetHoverScale - star.hoverScale) * 0.15;
-                star.glow += (star.targetGlow - star.glow) * 0.1;
-                
-                star.pulse += star.pulseSpeed;
-                star.rotation += star.rotationSpeed;
-                
-                // Разная амплитуда движения для разных звёзд
-                let orbitRadius;
+            // Обновление позиций звёзд
+            for (let star of stars) {
+                // Звезда Матвея - плавное движение вокруг центра
                 if (star.isMatvey) {
-                    orbitRadius = 8; // Меньшее движение для центральной звезды
-                } else if (star.isUserStar) {
-                    orbitRadius = 12 + (i % 6); // Пользовательские звёзды
-                } else {
-                    orbitRadius = 15 + (i % 8) * 3; // Фоновые звёзды
+                    const orbitX = Math.cos(time * 0.1) * 30;
+                    const orbitY = Math.sin(time * 0.13) * 20;
+                    const waveX = Math.sin(time * 0.3) * 5;
+                    const waveY = Math.cos(time * 0.2) * 5;
+                    star.x = centerX + orbitX + waveX;
+                    star.y = centerY + orbitY + waveY;
+                }
+                // Остальные звёзды - вращение вокруг центра с разной скоростью
+                else {
+                    const dx = star.originalX - centerX;
+                    const dy = star.originalY - centerY;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    const orbitSpeed = 0.1 / (distance / 150 + 1);
+                    const angle = time * orbitSpeed + (star.id * 0.01);
+                    
+                    const currentDist = distance * (0.95 + Math.sin(time * 0.08 + star.id) * 0.05);
+                    const orbitX = Math.cos(angle) * currentDist;
+                    const orbitY = Math.sin(angle) * currentDist * 0.8;
+                    
+                    star.x = centerX + orbitX;
+                    star.y = centerY + orbitY;
                 }
                 
-                star.x = star.originalX + Math.cos(time * 0.2 + i * 0.05) * orbitRadius;
-                star.y = star.originalY + Math.sin(time * 0.15 + i * 0.05) * orbitRadius * 0.7;
+                // Пульсация
+                star.pulse += star.pulseSpeed;
                 
                 drawStar(star, time);
             }
+            
+            requestAnimationFrame(animate);
         }
         
-        function optimizeForMobile() {
-            particles = particles.slice(0, 200);
-            if (stars.length > 30) stars = stars.slice(0, 30);
-            CONFIG.HOVER_GLOW_INTENSITY = 1.5;
-            CONFIG.BACKGROUND_STARS = 150;
-        }
-        
+        // Функции формы
         function setupForm() {
             const form = document.getElementById('starForm');
             const valueOptions = document.querySelectorAll('.value-option');
@@ -1651,20 +1254,10 @@
                         selectedValueInput.value = this.dataset.value;
                     }
                 });
-                
-                // Добавляем клавиатурную навигацию
-                option.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.click();
-                    }
-                });
             });
             
             customValueInput.addEventListener('input', function() {
                 selectedValueInput.value = this.value;
-                
-                // Если пользователь вводит свою ценность, выбираем опцию "Другой вариант"
                 if (this.value.trim()) {
                     valueOptions.forEach(opt => opt.classList.remove('selected'));
                     otherOption.classList.add('selected');
@@ -1681,7 +1274,7 @@
                 const reason = document.getElementById('valueReason').value.trim();
                 
                 if (!name || !studentClass || !value || !reason) {
-                    showNotification('Пожалуйста, заполни все поля!', 'error');
+                    alert('Пожалуйста, заполни все поля!');
                     return;
                 }
                 
@@ -1690,25 +1283,17 @@
                     class: studentClass,
                     value: value,
                     reason: reason,
-                    timestamp: new Date().toISOString(),
-                    source: 'website'
+                    timestamp: new Date().toISOString()
                 };
                 
                 userStars.push(starData);
                 localStorage.setItem('gymnasiumValues', JSON.stringify(userStars));
                 
-                // Если пользователь добавляет звезду с именем "Матвей Левченко", обновляем центральную звезду
-                if (name === "Матвей Левченко") {
-                    addMatveyStar(starData);
-                } else {
-                    addStarToGalaxy(starData, 3000 + userStars.length);
-                }
-                
+                addStarToGalaxy(starData, 2000 + userStars.length);
                 closeForm();
-                showNotification('Твоя звезда добавлена в личную галактику! ✨', 'success');
-                
                 updateStats();
                 
+                showNotification('Твоя звезда добавлена! ✨');
                 form.reset();
                 valueOptions.forEach(opt => opt.classList.remove('selected'));
                 customValueInput.style.display = 'none';
@@ -1717,40 +1302,29 @@
             });
         }
         
-        function showNotification(message, type = 'success') {
+        function showNotification(message) {
             const notification = document.createElement('div');
-            const bgColor = type === 'success' ? 'linear-gradient(45deg, #32cd32, #00ced1)' : 
-                           type === 'error' ? 'linear-gradient(45deg, #ff4444, #ff8c00)' :
-                           'linear-gradient(45deg, #4169e1, #8a2be2)';
-            
             notification.style.cssText = `
                 position: fixed;
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: ${bgColor};
-                color: ${type === 'success' ? 'black' : 'white'};
-                padding: 20px 35px;
-                border-radius: 15px;
+                background: linear-gradient(45deg, #32cd32, #00ced1);
+                color: black;
+                padding: 15px 25px;
+                border-radius: 12px;
                 font-weight: bold;
-                font-size: 18px;
                 z-index: 10001;
-                box-shadow: 0 10px 40px rgba(255, 221, 0, 0.5);
+                box-shadow: 0 10px 30px rgba(50, 205, 50, 0.5);
                 text-align: center;
-                animation: fadeInOut 3s ease-in-out;
-                max-width: 90vw;
-                word-break: break-word;
-                pointer-events: none;
+                animation: fadeInOut 2s ease-in-out;
             `;
             
             const style = document.createElement('style');
             style.textContent = `
                 @keyframes fadeInOut {
-                    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-                    10% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-                    20% { transform: translate(-50%, -50%) scale(1); }
-                    80% { opacity: 1; }
-                    100% { opacity: 0; }
+                    0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+                    20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
                 }
             `;
             
@@ -1761,10 +1335,10 @@
             setTimeout(() => {
                 notification.remove();
                 style.remove();
-            }, 3000);
+            }, 2000);
         }
         
-        // Функции для модальных окон
+        // Модальные окна
         window.openForm = function() {
             document.getElementById('formOverlay').style.display = 'flex';
             document.getElementById('studentName').focus();
@@ -1791,39 +1365,27 @@
             document.getElementById('infoOverlay').style.display = 'none';
         };
         
-        // Функция для открытия Google Формы
-        window.openGoogleForm = function() {
-            if (CONFIG.GOOGLE_FORM_URL) {
-                window.open(CONFIG.GOOGLE_FORM_URL, '_blank');
-            } else {
-                showNotification('Ссылка на Google Форму будет добавлена позже. Спроси у классного руководителя!', 'info');
-            }
-        };
-        
+        // ⭐⭐⭐ ИСПРАВЛЕННАЯ СТАТИСТИКА ⭐⭐⭐
         function updateStats() {
-            const userStarsData = JSON.parse(localStorage.getItem('gymnasiumValues')) || [];
-            
-            // Фильтруем только звезды текущего пользователя (исключаем Матвея)
-            const myStars = userStarsData.filter(star => !star.isMatvey);
+            // Фильтруем звёзды, исключая Матвея
+            const myStars = userStars.filter(star => !star.isMatvey);
             
             // Общее количество моих звёзд
             document.getElementById('totalStars').textContent = myStars.length;
             
-            // Мой класс (берем из последней добавленной звезды)
             if (myStars.length > 0) {
+                // Мой класс (из последней добавленной звезды)
                 const lastStar = myStars[myStars.length - 1];
                 document.getElementById('myClass').textContent = lastStar.class + ' класс';
-            } else {
-                document.getElementById('myClass').textContent = '-';
-            }
-            
-            // Моя главная ценность (самая частая)
-            if (myStars.length > 0) {
+                
+                // Подсчитываем частоту ценностей
                 const valueCount = {};
                 myStars.forEach(star => {
-                    valueCount[star.value] = (valueCount[star.value] || 0) + 1;
+                    const value = star.value || 'Не указано';
+                    valueCount[value] = (valueCount[value] || 0) + 1;
                 });
                 
+                // Находим самую частую ценность (главную)
                 let mainValue = '-';
                 let maxCount = 0;
                 for (const [value, count] of Object.entries(valueCount)) {
@@ -1832,142 +1394,57 @@
                         mainValue = value;
                     }
                 }
-                document.getElementById('myMainValue').textContent = mainValue;
-            } else {
-                document.getElementById('myMainValue').textContent = '-';
-            }
-            
-            // Дата первого вклада
-            if (myStars.length > 0) {
-                const firstStar = myStars.reduce((earliest, star) => {
-                    return new Date(star.timestamp) < new Date(earliest.timestamp) ? star : earliest;
-                });
-                const date = new Date(firstStar.timestamp);
-                document.getElementById('firstContribution').textContent = 
-                    date.toLocaleDateString('ru-RU');
-            } else {
-                document.getElementById('firstContribution').textContent = '-';
-            }
-            
-            // Распределение моих ценностей
-            let myValuesDistributionHTML = '';
-            if (myStars.length > 0) {
-                const valueCount = {};
-                myStars.forEach(star => {
-                    valueCount[star.value] = (valueCount[star.value] || 0) + 1;
-                });
+                document.getElementById('myMainValue').textContent = mainValue.length > 10 ? mainValue.substring(0, 10) + '...' : mainValue;
                 
-                const sortedValues = Object.entries(valueCount).sort((a, b) => b[1] - a[1]);
+                // Находим самую популярную ценность среди всех
+                let popularValue = '-';
+                let popularCount = 0;
+                for (const [value, count] of Object.entries(valueCount)) {
+                    if (count > popularCount) {
+                        popularCount = count;
+                        popularValue = value;
+                    }
+                }
+                document.getElementById('popularValue').textContent = popularValue.length > 10 ? popularValue.substring(0, 10) + '...' : popularValue;
                 
-                sortedValues.forEach(([value, count]) => {
-                    const percentage = Math.round((count / myStars.length) * 100);
-                    const color = CONFIG.VALUE_COLORS[value] || CONFIG.VALUE_COLORS['Другой'];
-                    myValuesDistributionHTML += `
-                        <div class="distribution-item">
-                            <span style="min-width: 140px; color: ${color};">${value}:</span>
-                            <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; margin: 0 15px;">
-                                <div style="height: 100%; width: ${Math.max(5, percentage)}%; background: linear-gradient(90deg, ${color}, ${color}aa); border-radius: 10px;"></div>
+                // Распределение ценностей
+                let distributionHTML = '';
+                const sortedValues = Object.entries(valueCount)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 10); // Показываем топ-10
+                
+                if (sortedValues.length > 0) {
+                    sortedValues.forEach(([value, count]) => {
+                        const percentage = Math.round((count / myStars.length) * 100);
+                        const color = CONFIG.VALUE_COLORS[value] || CONFIG.VALUE_COLORS['Другой'];
+                        const displayValue = value.length > 15 ? value.substring(0, 15) + '...' : value;
+                        distributionHTML += `
+                            <div class="distribution-item">
+                                <span style="min-width: 100px; color: ${color}; font-weight: bold;">${displayValue}</span>
+                                <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 0 10px; overflow: hidden;">
+                                    <div style="height: 100%; width: ${Math.max(5, percentage)}%; background: ${color}; border-radius: 10px;"></div>
+                                </div>
+                                <span style="min-width: 70px; text-align: right; color: #aaddff; font-weight: bold;">
+                                    ${count} (${percentage}%)
+                                </span>
                             </div>
-                            <span style="min-width: 80px; text-align: right; color: #aaddff;">${count} (${percentage}%)</span>
-                        </div>
-                    `;
-                });
-            } else {
-                myValuesDistributionHTML = '<div style="color: #aaddff; text-align: center; padding: 20px;">У тебя пока нет звёзд. Добавь первую!</div>';
-            }
-            document.getElementById('myValuesDistribution').innerHTML = myValuesDistributionHTML;
-        }
-        
-        // Функция для импорта данных из Google Forms (для админа)
-        function importFromGoogleForms(data) {
-            if (!Array.isArray(data)) return;
-            
-            let importedCount = 0;
-            data.forEach(item => {
-                // Проверяем, нет ли уже такой звезды
-                const exists = userStars.some(star => 
-                    star.name === item.name && 
-                    star.class === item.class && 
-                    star.value === item.value
-                );
+                        `;
+                    });
+                } else {
+                    distributionHTML = '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных</div>';
+                }
                 
-                if (!exists) {
-                    const starData = {
-                        name: item.name,
-                        class: item.class,
-                        value: item.value,
-                        reason: item.reason,
-                        timestamp: new Date().toISOString(),
-                        source: 'google_forms'
-                    };
-                    
-                    userStars.push(starData);
-                    
-                    // Если импортируется звезда Матвея, обновляем центральную
-                    if (item.name === "Матвей Левченко") {
-                        addMatveyStar(starData);
-                    } else {
-                        addStarToGalaxy(starData, 4000 + userStars.length);
-                    }
-                    
-                    importedCount++;
-                }
-            });
-            
-            if (importedCount > 0) {
-                localStorage.setItem('gymnasiumValues', JSON.stringify(userStars));
-                updateStats();
-                showNotification(`Импортировано ${importedCount} новых звёзд! ✨`, 'success');
+                document.getElementById('myValuesDistribution').innerHTML = distributionHTML;
+            } else {
+                document.getElementById('myClass').textContent = '-';
+                document.getElementById('myMainValue').textContent = '-';
+                document.getElementById('popularValue').textContent = '-';
+                document.getElementById('myValuesDistribution').innerHTML = 
+                    '<div style="color: #aaddff; text-align: center; padding: 20px;">У тебя пока нет звёзд. Добавь первую!</div>';
             }
         }
         
-        // Проверка на автоимпорт (при загрузке страницы)
-        function checkForAutoImport() {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('import')) {
-                // Здесь можно добавить логику автоматического импорта
-                // Например, загрузка данных из localStorage с ключом 'pending_import'
-                const pendingData = localStorage.getItem('pending_google_forms_data');
-                if (pendingData) {
-                    try {
-                        const data = JSON.parse(pendingData);
-                        importFromGoogleForms(data);
-                        localStorage.removeItem('pending_google_forms_data');
-                    } catch (e) {
-                        console.error('Ошибка импорта:', e);
-                    }
-                }
-            }
-        }
-        
-        // Функция для админ-панели
-        function showAdminPanel() {
-            const adminData = prompt('Введите данные для импорта (JSON):');
-            if (adminData) {
-                try {
-                    const data = JSON.parse(adminData);
-                    importFromGoogleForms(data);
-                } catch (e) {
-                    alert('Ошибка в формате данных!');
-                }
-            }
-        }
-        
-        // Показываем админ-панель только при специальном параметре
-        if (window.location.search.includes('admin=true')) {
-            document.getElementById('adminPanel').style.display = 'block';
-        }
-        
-        // Обработчики полноэкранного режима
-        document.addEventListener('fullscreenchange', () => setupCanvas());
-        document.addEventListener('webkitfullscreenchange', () => setupCanvas());
-        
-        // Очистка при закрытии
-        window.addEventListener('beforeunload', () => {
-            if (animationId) cancelAnimationFrame(animationId);
-        });
-        
-        // Запуск
+        // Запуск при загрузке
         window.addEventListener('load', init);
     </script>
 </body>
