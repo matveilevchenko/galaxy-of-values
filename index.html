@@ -3,8 +3,9 @@
 <head>
     <title>Галактика Ценностей - Гимназия им. Е.М. Примакова</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="description" content="Интерактивная галактика ценностей учеников гимназии">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { 
             margin: 0; 
@@ -15,7 +16,7 @@
         body { 
             background: #000; 
             color: white; 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; 
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
             overflow: hidden; 
             cursor: default;
             -webkit-tap-highlight-color: transparent;
@@ -54,22 +55,17 @@
             color: #ffdd00;
             font-size: 18px;
             text-align: center;
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(20, 20, 40, 0.98));
-            padding: 25px;
-            border-radius: 20px;
-            border: 3px solid;
-            border-image: linear-gradient(45deg, #ffdd00, #ff8c00, #ffdd00) 1;
-            animation: borderRotate 3s linear infinite;
-            box-shadow: 0 0 60px rgba(255, 221, 0, 0.4);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 30px 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 221, 0, 0.3);
+            box-shadow: 0 0 60px rgba(255, 221, 0, 0.3);
             z-index: 1000;
             width: 90%;
             max-width: 500px;
-        }
-        
-        @keyframes borderRotate {
-            0% { border-image-source: linear-gradient(45deg, #ffdd00, #ff8c00, #ffdd00); }
-            50% { border-image-source: linear-gradient(135deg, #ffdd00, #ff8c00, #ffdd00); }
-            100% { border-image-source: linear-gradient(225deg, #ffdd00, #ff8c00, #ffdd00); }
+            font-family: 'Orbitron', monospace;
+            transition: opacity 0.5s ease;
         }
         
         .loading::after {
@@ -78,7 +74,7 @@
             width: 40px;
             height: 40px;
             margin: 20px auto;
-            border: 4px solid rgba(255, 221, 0, 0.3);
+            border: 3px solid rgba(255, 221, 0, 0.3);
             border-top-color: #ffdd00;
             border-radius: 50%;
             animation: spin 1s linear infinite;
@@ -90,136 +86,247 @@
         
         .header {
             position: absolute;
-            top: 15px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 20, 40, 0.95));
-            padding: 12px;
-            border-radius: 12px;
-            border: 2px solid;
-            border-image: linear-gradient(45deg, rgba(255, 221, 0, 0.7), rgba(255, 140, 0, 0.5)) 1;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(25px);
+            padding: 14px 24px;
+            border-radius: 60px;
+            border: 1px solid rgba(255, 221, 0, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             z-index: 200;
             text-align: center;
-            width: 94%;
-            max-width: 600px;
-            backdrop-filter: blur(10px);
+            width: auto;
+            max-width: 95vw;
+            white-space: nowrap;
         }
         
         .header h1 {
-            background: linear-gradient(45deg, #ffdd00, #ff8c00);
+            background: linear-gradient(135deg, #ffdd00, #ffaa33, #ffdd00);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-size: 20px;
-            margin-bottom: 5px;
-            text-shadow: 0 0 10px rgba(255, 221, 0, 0.5);
-            line-height: 1.2;
+            font-size: clamp(16px, 5vw, 32px);
+            margin-bottom: 6px;
+            font-family: 'Orbitron', monospace;
             font-weight: 800;
+            letter-spacing: 1px;
+            animation: shimmer 3s linear infinite;
+            white-space: nowrap;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .header .school-name {
+            font-size: clamp(10px, 3vw, 14px);
+            color: #ffdd88;
+            margin-bottom: 4px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-top: 1px solid rgba(255, 221, 0, 0.3);
+            display: inline-block;
+            padding-top: 5px;
+            white-space: nowrap;
         }
         
         .header p {
-            color: #aaddff;
-            font-size: 13px;
+            color: rgba(255, 221, 136, 0.9);
+            font-size: clamp(9px, 2.5vw, 12px);
             line-height: 1.3;
-            opacity: 0.9;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
         }
         
         .controls {
             position: absolute;
-            bottom: 15px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 15px;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(20px);
+            padding: 10px 20px;
+            border-radius: 80px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
             z-index: 200;
-            width: 94%;
-            max-width: 500px;
-            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+            justify-content: center;
+            width: auto;
+            max-width: 95vw;
         }
         
         .control-btn {
-            background: linear-gradient(145deg, rgba(80, 80, 120, 0.95), rgba(50, 50, 80, 0.98));
+            background: linear-gradient(135deg, #2a2a4a, #1a1a3a);
+            backdrop-filter: blur(15px);
             color: white;
-            font-weight: 600;
-            font-size: 15px;
-            border: none;
-            border-bottom: 3px solid rgba(255, 215, 0, 0.6);
-            padding: 14px;
-            border-radius: 12px;
+            font-weight: 700;
+            font-size: clamp(11px, 3.5vw, 14px);
+            border: 1px solid rgba(255, 221, 0, 0.4);
+            padding: 10px 20px;
+            border-radius: 60px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            letter-spacing: 0.5px;
-        }
-        
-        .control-btn:hover, .control-btn:active {
-            background: linear-gradient(145deg, rgba(100, 100, 150, 0.95), rgba(70, 70, 110, 0.98));
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
-            border-bottom-color: rgba(255, 215, 0, 0.9);
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         
         .stats-btn {
-            background: linear-gradient(145deg, rgba(65, 105, 180, 0.95), rgba(45, 85, 160, 0.98));
-            border-bottom: 3px solid rgba(65, 105, 225, 0.6);
-        }
-        
-        .stats-btn:hover, .stats-btn:active {
-            background: linear-gradient(145deg, rgba(85, 125, 200, 0.95), rgba(65, 105, 180, 0.98));
+            background: linear-gradient(135deg, #1e3a5f, #0f2a4a);
+            border-color: rgba(100, 150, 255, 0.5);
         }
         
         .info-btn {
-            background: linear-gradient(145deg, rgba(50, 180, 50, 0.95), rgba(30, 160, 30, 0.98));
-            border-bottom: 3px solid rgba(50, 205, 50, 0.6);
+            background: linear-gradient(135deg, #2a5f3a, #1a4a2a);
+            border-color: rgba(100, 255, 100, 0.5);
         }
         
-        .info-btn:hover, .info-btn:active {
-            background: linear-gradient(145deg, rgba(70, 200, 70, 0.95), rgba(50, 180, 50, 0.98));
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
         
-        /* ИСПРАВЛЕННЫЙ TOOLTIP */
+        .control-btn:hover::before {
+            left: 100%;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .control-btn:active {
+            transform: scale(0.98);
+        }
+        
+        @media (max-width: 480px) {
+            .controls {
+                gap: 10px;
+                padding: 8px 12px;
+                bottom: 20px;
+            }
+            .control-btn {
+                padding: 8px 14px;
+                font-size: 11px;
+            }
+            .header {
+                padding: 10px 16px;
+                top: 12px;
+            }
+            .header h1 {
+                font-size: 14px;
+                letter-spacing: 0.5px;
+            }
+            .header .school-name {
+                font-size: 8px;
+            }
+            .header p {
+                font-size: 7px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .controls {
+                gap: 8px;
+                padding: 8px 12px;
+            }
+            .control-btn {
+                padding: 6px 12px;
+                font-size: 10px;
+                gap: 4px;
+            }
+            .header {
+                padding: 8px 12px;
+            }
+            .header h1 {
+                font-size: 12px;
+                letter-spacing: 0;
+            }
+            .header .school-name {
+                font-size: 7px;
+            }
+            .header p {
+                font-size: 6px;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            .control-btn {
+                padding: 12px 28px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (min-width: 1025px) {
+            .header h1 {
+                font-size: 32px;
+            }
+            .control-btn {
+                padding: 14px 36px;
+                font-size: 16px;
+            }
+        }
+        
         .tooltip {
             position: fixed;
-            background: rgba(0, 0, 0, 0.97);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
             color: white;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 18px 22px;
+            border-radius: 20px;
             font-size: 14px;
             pointer-events: none;
             opacity: 0;
-            transition: opacity 0.3s;
-            border: 2px solid #ffdd00;
-            box-shadow: 0 0 40px rgba(255, 221, 0, 0.4);
-            max-width: 320px;
+            transition: opacity 0.3s, transform 0.3s;
+            border: 1px solid rgba(255, 221, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 221, 0, 0.2);
+            max-width: 340px;
             min-width: 280px;
             z-index: 10000;
-            line-height: 1.4;
-            backdrop-filter: blur(10px);
+            line-height: 1.5;
+            transform: translateY(10px);
+        }
+        
+        .tooltip.show {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .star-name {
             color: #ffdd00;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-size: 16px;
+            font-family: 'Orbitron', monospace;
         }
         
         .star-info {
             color: #aaddff;
             font-size: 13px;
             margin-bottom: 6px;
-            line-height: 1.3;
         }
         
         .overlay {
@@ -228,24 +335,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.98);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            padding: 15px;
+            padding: 20px;
             overflow-y: auto;
         }
         
         .modal-container {
-            background: linear-gradient(135deg, rgba(20, 20, 40, 0.98), rgba(15, 15, 35, 0.99));
-            padding: 20px;
-            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.98), rgba(5, 5, 15, 0.99));
+            backdrop-filter: blur(20px);
+            padding: 28px;
+            border-radius: 32px;
             width: 100%;
-            max-width: 500px;
-            border: 2px solid;
-            border-image: linear-gradient(45deg, rgba(255, 215, 0, 0.6), rgba(65, 105, 225, 0.6)) 1;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            max-width: 700px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 215, 0, 0.1);
             max-height: 85vh;
             overflow-y: auto;
         }
@@ -254,77 +362,102 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            padding-bottom: 16px;
         }
         
         .modal-header h2 {
-            color: #ffd700;
-            font-size: 20px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            line-height: 1.2;
+            background: linear-gradient(135deg, #ffdd00, #ffaa33);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 24px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 800;
         }
         
         .close-btn {
-            background: linear-gradient(145deg, rgba(255, 80, 80, 0.95), rgba(220, 60, 60, 0.98));
+            background: rgba(255, 80, 80, 0.2);
+            backdrop-filter: blur(10px);
             color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
+            border: 1px solid rgba(255, 80, 80, 0.5);
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 22px;
+            font-size: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            flex-shrink: 0;
-            border-bottom: 3px solid rgba(255, 0, 0, 0.6);
         }
         
-        .close-btn:hover, .close-btn:active {
-            background: linear-gradient(145deg, rgba(255, 100, 100, 0.95), rgba(240, 80, 80, 0.98));
+        .close-btn:hover {
+            background: rgba(255, 80, 80, 0.4);
             transform: scale(1.05);
+            border-color: rgba(255, 80, 80, 0.8);
         }
         
         .form-group {
-            margin-bottom: 20px;
-            width: 100%;
+            margin-bottom: 24px;
         }
         
         .form-group label {
             display: block;
             margin-bottom: 10px;
-            color: #ffd700;
-            font-weight: bold;
-            font-size: 15px;
+            color: #ffdd88;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
         
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 12px;
-            background: rgba(10, 10, 20, 0.9);
-            border: 2px solid rgba(65, 105, 225, 0.5);
-            border-radius: 10px;
+            padding: 14px 18px;
+            background: rgba(10, 10, 20, 0.35);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            border-radius: 20px;
             color: white;
             font-size: 15px;
             transition: all 0.3s;
-            font-family: inherit;
+            font-family: 'Montserrat', sans-serif;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
         }
         
         .form-group select {
-            background: rgba(10, 10, 20, 0.9) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") no-repeat right 12px center;
-            background-size: 18px;
-            padding-right: 40px;
+            background: rgba(10, 10, 20, 0.35) url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffdd00'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e") no-repeat right 18px center;
+            background-size: 20px;
+            padding-right: 45px;
+            backdrop-filter: blur(12px);
+        }
+        
+        .form-group select option {
+            background: rgba(5, 5, 20, 0.98);
+            backdrop-filter: blur(8px);
+            color: #ffdd88;
+            padding: 12px;
+        }
+        
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            background: rgba(20, 20, 40, 0.5);
+            border-color: rgba(255, 215, 0, 0.6);
         }
         
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: rgba(255, 215, 0, 0.8);
-            background: rgba(15, 15, 25, 0.95);
+            border-color: #ffdd00;
+            background: rgba(30, 30, 55, 0.65);
+            box-shadow: 0 0 20px rgba(255, 221, 0, 0.25);
         }
         
         .form-group textarea {
@@ -334,53 +467,156 @@
         
         .value-options {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
         }
         
         .value-option {
-            padding: 14px;
-            background: linear-gradient(135deg, rgba(40, 40, 70, 0.8), rgba(30, 30, 60, 0.9));
-            border: 2px solid rgba(65, 105, 225, 0.4);
-            border-radius: 10px;
+            padding: 12px 16px;
+            background: rgba(30, 30, 55, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 60px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s ease;
             text-align: center;
-            font-weight: bold;
-            color: white;
-            font-size: 14px;
+            font-weight: 600;
+            color: #e0e0ff;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
         }
         
-        .value-option:hover, .value-option:active {
-            border-color: rgba(255, 215, 0, 0.6);
-            background: linear-gradient(135deg, rgba(60, 60, 100, 0.8), rgba(50, 50, 90, 0.9));
+        .value-option:hover {
+            border-color: #ffdd00;
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-2px);
+            color: #ffdd88;
         }
         
         .value-option.selected {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 185, 0, 0.3));
-            border-color: rgba(255, 215, 0, 0.8);
+            background: rgba(255, 215, 0, 0.3);
+            border-color: #ffdd00;
             color: #ffdd00;
+            box-shadow: 0 0 20px rgba(255, 221, 0, 0.3);
+        }
+        
+        .values-section {
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 24px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .values-section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .values-section-title span {
+            font-size: 24px;
+        }
+        
+        .values-section-title h3 {
+            background: linear-gradient(135deg, #ffdd88, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 0.5px;
+        }
+        
+        .other-values-section {
+            background: rgba(100, 150, 255, 0.08);
+            border-radius: 24px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+        }
+        
+        .other-values-section .values-section-title h3 {
+            background: linear-gradient(135deg, #88aaff, #4466cc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .custom-value-btn {
+            background: rgba(255, 100, 100, 0.2);
+            border-color: rgba(255, 100, 100, 0.4);
+            margin-bottom: 15px;
+        }
+        
+        .custom-value-btn:hover {
+            background: rgba(255, 100, 100, 0.3);
+            border-color: #ff6666;
+        }
+        
+        .custom-value-input {
+            display: none;
+            margin-top: 12px;
+        }
+        
+        .value-hint {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(100, 200, 255, 0.12);
+            backdrop-filter: blur(8px);
+            border-radius: 16px;
+            font-size: 12px;
+            color: #88ccff;
+            border-left: 3px solid #44aaff;
+            line-height: 1.5;
         }
         
         .submit-btn {
             width: 100%;
-            background: linear-gradient(45deg, #32cd32, #00ced1);
-            color: black;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
             border: none;
             padding: 16px;
-            border-radius: 10px;
+            border-radius: 60px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 24px;
             transition: all 0.3s;
-            border-bottom: 3px solid rgba(0, 200, 200, 0.6);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
         }
         
-        .submit-btn:hover, .submit-btn:active {
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+        
+        .submit-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4);
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.6);
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
         }
         
         .stats-grid {
@@ -391,110 +627,248 @@
         }
         
         .stat-card {
-            background: linear-gradient(135deg, rgba(30, 30, 50, 0.9), rgba(20, 20, 40, 0.95));
-            padding: 15px;
-            border-radius: 12px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            background: rgba(30, 30, 50, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
         }
         
         .stat-card h3 {
-            color: #ffd700;
-            margin-bottom: 10px;
-            font-size: 14px;
+            color: #ffdd88;
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         
         .stat-value {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: bold;
-            color: #aaddff;
-            text-shadow: 0 0 8px rgba(170, 221, 255, 0.5);
+            background: linear-gradient(135deg, #ffdd88, #ffaa44);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             line-height: 1.2;
+            font-family: 'Orbitron', monospace;
         }
         
-        /* Google Forms кнопка */
-        .google-form-btn {
+        /* Адаптивные стили для статистики на мобильных устройствах */
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+                gap: 10px !important;
+            }
+            
+            .stat-card {
+                padding: 12px !important;
+            }
+            
+            .stat-value {
+                font-size: 20px !important;
+            }
+            
+            .distribution-item {
+                flex-wrap: wrap !important;
+                gap: 8px !important;
+            }
+            
+            .distribution-item span:first-child {
+                min-width: 80px !important;
+            }
+            
+            .modal-container {
+                padding: 16px !important;
+            }
+        }
+        
+        .yandex-form-btn {
             width: 100%;
-            background: linear-gradient(45deg, #4285f4, #34a853);
-            color: white;
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.9), rgba(255, 200, 0, 0.9));
+            color: #1a1a2e;
             border: none;
-            padding: 16px;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 14px;
+            border-radius: 60px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
+            margin-top: 20px;
             text-decoration: none;
             display: block;
             text-align: center;
-            border-bottom: 3px solid rgba(66, 133, 244, 0.6);
+            transition: all 0.3s;
+            font-family: 'Orbitron', monospace;
         }
         
-        .google-form-btn:hover, .google-form-btn:active {
+        .yandex-form-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.4);
+            box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
         }
         
-        /* Информация для детей - стили */
         .info-block {
-            background: rgba(255,215,0,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            background: rgba(255, 215, 0, 0.08);
+            padding: 18px;
+            border-radius: 20px;
+            margin-bottom: 20px;
             border-left: 4px solid #ffd700;
         }
         
-        .info-block h3 {
-            color: #ffd700;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-        
-        .info-block p {
-            color: #aaddff;
-            margin: 0;
-            line-height: 1.4;
-        }
-        
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 15px 0;
-        }
-        
-        .feature-item {
-            background: rgba(65, 105, 225, 0.1);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.3;
-        }
-        
-        .feature-icon {
-            font-size: 20px;
-            margin-bottom: 5px;
-            display: block;
-        }
-        
-        .step-list {
-            margin: 15px 0;
-        }
-        
-        .step-item {
+        .value-full-card {
+            background: rgba(255, 215, 0, 0.05);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
             margin-bottom: 12px;
-            padding-left: 25px;
-            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
         }
         
-        .step-item:before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: #ffdd00;
+        .value-full-card:hover {
+            border-color: rgba(255, 215, 0, 0.5);
+            transform: translateX(4px);
+        }
+        
+        .value-full-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: rgba(255, 215, 0, 0.08);
             font-weight: bold;
+            color: #ffdd88;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .value-full-description {
+            padding: 14px 18px;
+            font-size: 12px;
+            line-height: 1.5;
+            color: #ccddff;
+        }
+        
+        .quote-card {
+            background: rgba(255, 215, 0, 0.05);
+            border-left: 3px solid #ffdd00;
+            padding: 14px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+        
+        .quote-card:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: translateX(4px);
+        }
+        
+        .quote-text {
+            font-style: italic;
+            color: #ffffff;
+            font-size: 13px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+        
+        .quote-author {
+            color: #ffdd88;
+            font-size: 11px;
+            font-weight: 500;
+            text-align: right;
+        }
+        
+        .author-card {
+            display: flex;
+            gap: 18px;
+            background: rgba(255, 215, 0, 0.08);
+            border-radius: 24px;
+            padding: 18px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffdd00, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            flex-shrink: 0;
+        }
+        
+        .author-name {
+            font-weight: bold;
+            color: #ffdd88;
+            margin-bottom: 6px;
+            font-family: 'Orbitron', monospace;
+        }
+        
+        .author-quote {
+            font-size: 12px;
+            color: #ccddff;
+            margin-bottom: 6px;
+        }
+        
+        .author-curator {
+            font-size: 11px;
+            color: #88aaff;
+        }
+        
+        .tip-block {
+            margin-top: 20px;
+            padding: 14px;
+            background: rgba(100, 200, 255, 0.08);
+            border-radius: 18px;
+            text-align: center;
+            font-size: 12px;
+            color: #88ccff;
+            border-left: 3px solid #44aaff;
+        }
+        
+        .value-tooltip {
+            position: fixed;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.98), rgba(20, 20, 40, 0.98));
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 14px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            pointer-events: none;
+            border: 1px solid rgba(255, 221, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 221, 0, 0.2);
+            max-width: 280px;
+            z-index: 10001;
+            line-height: 1.5;
+            font-family: 'Montserrat', sans-serif;
+            animation: tooltipGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes tooltipGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 221, 0, 0.2); }
+            50% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 221, 0, 0.4); }
+        }
+        
+        .value-tooltip .tooltip-icon {
+            font-size: 20px;
+            margin-right: 10px;
+            float: left;
+        }
+        
+        .value-tooltip .tooltip-text {
+            margin-left: 30px;
+        }
+        
+        .value-tooltip .tooltip-title {
+            font-weight: bold;
+            color: #ffdd00;
+            margin-bottom: 5px;
+            font-family: 'Orbitron', monospace;
         }
         
         .distribution-list {
@@ -505,48 +879,58 @@
         .distribution-item {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
-            padding: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
             font-size: 13px;
+            transition: all 0.2s;
         }
         
-        /* Для очень маленьких экранов */
-        @media (max-width: 350px) {
-            .header h1 { font-size: 18px; }
-            .header p { font-size: 12px; }
-            .control-btn { font-size: 14px; padding: 12px; }
-            .value-options { grid-template-columns: 1fr; }
-            .modal-container { padding: 15px; }
-            .feature-grid { grid-template-columns: 1fr; }
-            .info-block { padding: 12px; }
+        .distribution-item:hover {
+            background: rgba(255, 255, 255, 0.08);
         }
         
-        /* Для планшетов */
-        @media (min-width: 768px) {
-            .header { top: 25px; padding: 20px; max-width: 700px; }
-            .header h1 { font-size: 24px; }
-            .header p { font-size: 16px; }
-            .controls { flex-direction: row; bottom: 25px; max-width: 700px; }
-            .control-btn { min-width: 200px; font-size: 16px; }
-            .modal-container { max-width: 600px; padding: 25px; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
         }
         
-        /* Анимации */
+        .feature-item {
+            background: rgba(65, 105, 225, 0.08);
+            padding: 14px;
+            border-radius: 16px;
+            text-align: center;
+            font-size: 13px;
+            border: 1px solid rgba(100, 150, 255, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .feature-item:hover {
+            border-color: rgba(100, 150, 255, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
         .modal-container {
-            animation: fadeIn 0.3s ease-out;
+            animation: fadeIn 0.4s ease-out;
         }
         
-        /* Скроллбар */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(45deg, #ffd700, #ff8c00); border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #ffd700, #ff8c00); border-radius: 3px; }
     </style>
 </head>
 <body>
@@ -554,8 +938,8 @@
     
     <div class="ui">
         <div class="loading" id="loading">
-            🚀 Загружаем Галактику Ценностей...
-            <div style="font-size: 14px; margin-top: 15px; color: #aaddff;">
+            🚀 ЗАГРУЖАЕМ ГАЛАКТИКУ...
+            <div style="font-size: 12px; margin-top: 15px; color: #aaddff; font-family: 'Montserrat';">
                 Проект "Мой мир ценностей"<br>
                 Гимназия им. Е.М. Примакова
             </div>
@@ -563,12 +947,11 @@
         
         <div class="header">
             <h1>✨ ГАЛАКТИКА ЦЕННОСТЕЙ ✨</h1>
-            <p>Музей "Мой мир ценностей"<br>
-            Наведи на звезду — узнай ценности учеников</p>
-        </div>
+            <div class="school-name">ГИМНАЗИЯ ИМ. Е.М. ПРИМАКОВА</div>
+            </div>
         
         <div class="controls">
-            <button class="control-btn" onclick="openForm()">⭐ ДОБАВИТЬ ЗВЕЗДУ</button>
+            <button class="control-btn" onclick="openForm()">⭐ СОЗДАТЬ ЗВЁЗДУ</button>
             <button class="control-btn stats-btn" onclick="openStats()">📊 СТАТИСТИКА</button>
             <button class="control-btn info-btn" onclick="openInfo()">ℹ️ О ПРОЕКТЕ</button>
         </div>
@@ -580,19 +963,19 @@
     <div class="overlay" id="formOverlay">
         <div class="modal-container">
             <div class="modal-header">
-                <h2>⭐ ДОБАВЛЕНИЕ ЗВЕЗДЫ</h2>
+                <h2>⭐ СОЗДАТЬ ЗВЁЗДУ</h2>
                 <button class="close-btn" onclick="closeForm()">×</button>
             </div>
             <form id="starForm">
                 <div class="form-group">
-                    <label for="studentName">1. Как тебя зовут?</label>
+                    <label for="studentName">🌟 Как тебя зовут?</label>
                     <input type="text" id="studentName" required placeholder="Имя и фамилия">
                 </div>
                 
                 <div class="form-group">
-                    <label for="studentClass">2. Из какого ты класса?</label>
+                    <label for="studentClass">📚 Из какого ты класса?</label>
                     <select id="studentClass" required>
-                        <option value="">Выбери класс</option>
+                        <option value="" disabled selected>Выбери класс</option>
                         <option value="1">1 класс</option>
                         <option value="2">2 класс</option>
                         <option value="3">3 класс</option>
@@ -608,25 +991,59 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>3. Какая ценность для тебя важна?</label>
-                    <div class="value-options" id="valueOptions">
-                        <div class="value-option" data-value="Уважение">Уважение</div>
-                        <div class="value-option" data-value="Ответственность">Ответственность</div>
-                        <div class="value-option" data-value="Дружба">Дружба</div>
-                        <div class="value-option" data-value="Справедливость">Справедливость</div>
-                        <div class="value-option" data-value="Спорт">Спорт</div>
-                        <div class="value-option" id="otherOption">Другое</div>
+                    <label>💎 Какая ценность для тебя важна?</label>
+                    
+                    <div class="values-section">
+                        <div class="values-section-title">
+                            <span>🏫</span>
+                            <h3>Ценности гимназии им. Е.М. Примакова</h3>
+                        </div>
+                        <div class="value-options" id="gymnasiumValues">
+                            <div class="value-option" data-value="Достоинство" data-description="Уважать себя и других, быть ответственным, не нарушать границы">✨ Достоинство</div>
+                            <div class="value-option" data-value="Сопричастность" data-description="Быть частью команды, заботиться о других, работать вместе">🤝 Сопричастность</div>
+                            <div class="value-option" data-value="Мастерство" data-description="Стремиться стать лучше каждый день, делиться умениями">🎯 Мастерство</div>
+                            <div class="value-option" data-value="Устойчивость" data-description="Справляться с трудностями, уметь договариваться, не сдаваться">🌱 Устойчивость</div>
+                            <div class="value-option" data-value="Глобальное мышление" data-description="Думать шире, понимать мир, мыслить нестандартно">🌍 Глобальное мышление</div>
+                        </div>
                     </div>
-                    <input type="text" id="customValue" placeholder="Твоя ценность" style="display: none; margin-top: 10px;">
+                    
+                    <div class="other-values-section">
+                        <div class="values-section-title">
+                            <span>⭐</span>
+                            <h3>Другие важные ценности</h3>
+                        </div>
+                        <div class="value-options" id="otherValues">
+                            <div class="value-option" data-value="Уважение">🙏 Уважение</div>
+                            <div class="value-option" data-value="Ответственность">⚡ Ответственность</div>
+                            <div class="value-option" data-value="Дружба">💙 Дружба</div>
+                            <div class="value-option" data-value="Справедливость">⚖️ Справедливость</div>
+                            <div class="value-option" data-value="Спорт">🏆 Спорт</div>
+                            <div class="value-option" data-value="Свобода">🕊️ Свобода</div>
+                            <div class="value-option" data-value="Творчество">🎨 Творчество</div>
+                            <div class="value-option" data-value="Семья">👨‍👩‍👧 Семья</div>
+                            <div class="value-option" data-value="Честность">💎 Честность</div>
+                            <div class="value-option" data-value="Забота">🤗 Забота</div>
+                        </div>
+                    </div>
+                    
+                    <div class="value-option custom-value-btn" id="otherOption">
+                        ✨ Своя ценность ✨
+                    </div>
+                    
+                    <input type="text" id="customValue" class="custom-value-input" placeholder="Напиши свою ценность (например: Честность, Забота, Юмор...)" style="display: none;">
                     <input type="hidden" id="selectedValue" required>
+                    
+                    <div class="value-hint">
+                        💡 <strong>Совет:</strong> Выбери то, что действительно важно для тебя!
+                    </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="valueReason">4. Почему это важно?</label>
-                    <textarea id="valueReason" required placeholder="Расскажи, почему ты выбрал(а) эту ценность"></textarea>
+                    <label for="valueReason">💬 Почему это важно? Расскажи свою историю</label>
+                    <textarea id="valueReason" required placeholder="Например: Эта ценность помогает мне быть лучше, потому что..."></textarea>
                 </div>
                 
-                <button type="submit" class="submit-btn">✨ СОЗДАТЬ ЗВЕЗДУ</button>
+                <button type="submit" class="submit-btn">✨ СОЗДАТЬ ЗВЕЗДУ ✨</button>
             </form>
         </div>
     </div>
@@ -635,21 +1052,19 @@
     <div class="overlay" id="statsOverlay">
         <div class="modal-container">
             <div class="modal-header">
-                <h2>📊 СТАТИСТИКА ЦЕННОСТЕЙ</h2>
+                <h2>📊 СТАТИСТИКА</h2>
                 <button class="close-btn" onclick="closeStats()">×</button>
             </div>
             
-            <!-- ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМА СТАТИСТИКИ -->
-            <div style="margin-bottom: 20px; display: flex; gap: 10px;">
-                <button id="personalStatsBtn" class="control-btn" style="flex: 1; background: linear-gradient(145deg, rgba(80, 80, 120, 0.95), rgba(50, 50, 80, 0.98));">
-                    📱 Мои звёзды
+            <div style="margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+                <button id="personalStatsBtn" class="control-btn" style="flex: 1; min-width: 120px; background: rgba(80, 80, 120, 0.8);">
+                    ⭐ МОИ ЗВЁЗДЫ
                 </button>
-                <button id="googleStatsBtn" class="control-btn" style="flex: 1; background: linear-gradient(145deg, rgba(65, 105, 180, 0.95), rgba(45, 85, 160, 0.98));">
-                    🌐 Google Forms
+                <button id="commonStatsBtn" class="control-btn" style="flex: 1; min-width: 120px; background: rgba(65, 105, 180, 0.8);">
+                    🌟 ОБЩЕЕ СОЗВЕЗДИЕ
                 </button>
             </div>
             
-            <!-- Личная статистика -->
             <div id="personalStats" class="stats-section">
                 <div class="stats-grid">
                     <div class="stat-card">
@@ -675,12 +1090,11 @@
                 </div>
             </div>
             
-            <!-- Статистика Google Forms -->
-            <div id="googleStats" class="stats-section" style="display: none;">
+            <div id="commonStats" class="stats-section" style="display: none;">
                 <div class="stats-grid">
                     <div class="stat-card">
                         <h3>Всего звёзд</h3>
-                        <div class="stat-value" id="totalGoogleStars">0</div>
+                        <div class="stat-value" id="totalCommonStars">0</div>
                     </div>
                     <div class="stat-card">
                         <h3>Участников</h3>
@@ -692,7 +1106,7 @@
                     </div>
                     <div class="stat-card">
                         <h3>Топ ценность</h3>
-                        <div class="stat-value" id="topGoogleValue">-</div>
+                        <div class="stat-value" id="topCommonValue">-</div>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -700,29 +1114,28 @@
                     <div class="distribution-list" id="classDistribution"></div>
                 </div>
                 <div class="stat-card">
-                    <h3>Топ ценностей Google Forms</h3>
-                    <div class="distribution-list" id="googleValuesDistribution"></div>
+                    <h3>Топ ценностей учеников</h3>
+                    <div class="distribution-list" id="commonValuesDistribution"></div>
                 </div>
             </div>
             
-            <!-- КНОПКА GOOGLE FORMS -->
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1" 
+            <a href="https://forms.yandex.ru/u/69caf4c2d046881bb4747af2" 
                target="_blank" 
-               class="google-form-btn">
-                📋 ЗАПОЛНИТЬ GOOGLE ФОРМУ (для общей галактики)
+               class="yandex-form-btn">
+                📝 ДОБАВИТЬ ЦЕННОСТЬ В ОБЩЕЕ СОЗВЕЗДИЕ
             </a>
             
-            <div style="margin-top: 15px; padding: 15px; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
-                <p style="color: #ffd700; font-size: 13px; line-height: 1.4;">
-                    <strong>🌟 Две галактики:</strong><br>
-                    1. <strong>Личная</strong> — твои звёзды (здесь)<br>
-                    2. <strong>Общая</strong> — звёзды всей гимназии (Google Форма)
+            <div style="margin-top: 16px; padding: 16px; background: rgba(255, 215, 0, 0.08); border-radius: 20px;">
+                <p style="color: #ffdd88; font-size: 13px; line-height: 1.5;">
+                    <strong>⭐ Два пространства:</strong><br>
+                    1. <strong>Мои звёзды</strong> - твои личные ценности (хранятся здесь)<br>
+                    2. <strong>Общее созвездие</strong> - ценности всех учеников (добавляй через форму)
                 </p>
             </div>
         </div>
     </div>
 
-    <!-- Информация о проекте (ДЕТСКАЯ ВЕРСИЯ) -->
+    <!-- Информация о проекте -->
     <div class="overlay" id="infoOverlay">
         <div class="modal-container">
             <div class="modal-header">
@@ -730,79 +1143,81 @@
                 <button class="close-btn" onclick="closeInfo()">×</button>
             </div>
             
-            <!-- БЛОК 1: Что это? -->
-            <div class="info-block">
-                <h3>✨ ЧТО ЭТО?</h3>
-                <p><strong>Галактика ценностей гимназиста!</strong><br>
-                Каждая звезда = что-то важное для ученика.</p>
+            <div class="info-block" style="text-align: center;">
+                <h3 style="margin: 0 0 10px 0; font-family: 'Orbitron';">✨ ГАЛАКТИКА ЦЕННОСТЕЙ ✨</h3>
+                <p>Каждая звезда - это что-то важное для ученика.<br>Наведи на звезду -> узнай ценность друга.<br>Добавь свою -> стань частью созвездия.</p>
             </div>
             
-            <!-- БЛОК 2: Зачем? -->
-            <h3>🎯 ЗАЧЕМ ЭТО?</h3>
+            <h3 style="margin: 24px 0 16px 0; color: #ffdd88; font-family: 'Orbitron'; font-size: 18px;">🏫 ЦЕННОСТИ ГИМНАЗИИ</h3>
+            
+            <div class="value-full-card">
+                <div class="value-full-header">✨ Достоинство</div>
+                <div class="value-full-description">• Мы уважаем другого.<br>• Мы берём на себя ответственность.<br>• Мы не нарушаем границы.<br>• Мы учимся на ошибках.</div>
+            </div>
+            
+            <div class="value-full-card">
+                <div class="value-full-header">🤝 Сопричастность</div>
+                <div class="value-full-description">• Каждый из нас - часть целого.<br>• У нас общие ценности.<br>• Мы умеем работать вместе.<br>• Мы неравнодушны.</div>
+            </div>
+            
+            <div class="value-full-card">
+                <div class="value-full-header">🎯 Мастерство</div>
+                <div class="value-full-description">• Мы стремимся стать лучше каждый день.<br>• Мы готовы тратить силы и время, чтобы добиваться результата.<br>• Мы делимся с другими тем, что умеем сами.</div>
+            </div>
+            
+            <div class="value-full-card">
+                <div class="value-full-header">🌱 Устойчивость</div>
+                <div class="value-full-description">• Мы способны меняться.<br>• Мы обладаем самоконтролем.<br>• Мы находим необходимые решения.<br>• Мы умеем договариваться.</div>
+            </div>
+            
+            <div class="value-full-card">
+                <div class="value-full-header">🌍 Глобальное мышление</div>
+                <div class="value-full-description">• Нам свойствен системный подход.<br>• Мы обладаем широким кругозором.<br>• Мы способны мыслить вне шаблона.<br>• Мы обладаем межкультурной эмпатией.</div>
+            </div>
+            
+
+            <h3 style="margin: 24px 0 16px 0; color: #ffdd88; font-family: 'Orbitron'; font-size: 18px;">🎮 КАК ЭТО РАБОТАЕТ</h3>
             <div class="feature-grid">
                 <div class="feature-item">
-                    <span class="feature-icon">👀</span>
-                    Узнать, что важно для друзей
+                    <span class="feature-icon">⭐</span>
+                    <strong>Мои звёзды</strong><br>
+                    Выбери личные ценности
                 </div>
                 <div class="feature-item">
-                    <span class="feature-icon">💬</span>
-                    Поделиться своим мнением
+                    <span class="feature-icon">🔭</span>
+                    <strong>Исследуй</strong><br>
+                    Наведи на звезду
                 </div>
                 <div class="feature-item">
-                    <span class="feature-icon">🌟</span>
-                    Увидеть картину ценностей всей гимназии
+                    <span class="feature-icon">📊</span>
+                    <strong>Статистика</strong><br>
+                    Узнай популярное
                 </div>
                 <div class="feature-item">
-                    <span class="feature-icon">🎮</span>
-                    Участвовать в общем проекте
+                    <span class="feature-icon">📝</span>
+                    <strong>Общее созвездие</strong><br>
+                    Добавь через форму
                 </div>
             </div>
             
-            <!-- БЛОК 3: Кто сделал? -->
-            <div class="info-block">
-                <h3>👤 КТО СДЕЛАЛ?</h3>
-                <p><strong>Матвей Левченко</strong>, 6 А класс<br>
-                <small>Куратор Зыков Михаил Анатольевич</small></p>
-            </div>
-            
-            <h3>🏫 Гимназия им. Е.М. Примакова</h3>
-            
-            <!-- БЛОК 4: Как играть? -->
-            <h3>🎮 КАК ИГРАТЬ?</h3>
-            <div class="step-list">
-                <div class="step-item">
-                    <strong>Добавить звезду</strong> — расскажи, что для тебя важно
-                </div>
-                <div class="step-item">
-                    <strong>Исследовать галактику</strong> — наведи на звезду, узнай мнение друга
-                </div>
-                <div class="step-item">
-                    <strong>Посмотреть статистику</strong> — узнай, какие ценности популярны
-                </div>
-                <div class="step-item">
-                    <strong>Заполнить Google Форму</strong> — стань частью истории гимназии!
+            <div class="author-card">
+                <div class="author-avatar">🚀</div>
+                <div>
+                    <div class="author-name">Матвей Левченко, 6А класс</div>
+                    <div class="author-quote">«Я создал эту галактику, чтобы мы лучше понимали друг друга. Каждый может создать свою звезду и увидеть, что важно для других. Наши ценности делают нас сильнее!»</div>
+                    <div class="author-curator">Куратор: Зыков Михаил Анатольевич</div>
                 </div>
             </div>
             
-            <!-- БЛОК 5: Две галактики -->
-            <div class="info-block">
-                <h3>🌟 ДВЕ ГАЛАКТИКИ</h3>
-                <p><strong>Личная</strong> — твои звёзды (только ты видишь)<br>
-                <strong>Общая</strong> — звёзды всей гимназии (после Google Формы)</p>
-            </div>
-            
-            <!-- КНОПКА GOOGLE FORMS -->
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1" 
+            <a href="https://forms.yandex.ru/u/69caf4c2d046881bb4747af2" 
                target="_blank" 
-               class="google-form-btn">
-                📋 ПЕРЕЙТИ К GOOGLE ФОРМЕ
+               class="yandex-form-btn">
+                📝 ДОБАВИТЬ СВОЮ ЦЕННОСТЬ В ОБЩЕЕ СОЗВЕЗДИЕ
             </a>
             
-            <div style="margin-top: 20px; padding: 15px; background: rgba(100, 200, 255, 0.1); border-radius: 10px;">
-                <p style="color: #66ccff; font-size: 14px; line-height: 1.4;">
-                    💡 <strong>Совет:</strong> Сначала добавь свою звезду здесь,<br>
-                    потом заполни Google Форму!
-                </p>
+            <div class="tip-block">
+                💡 <strong>Совет:</strong> Сначала добавь свои ценности в разделе «Создать звёзду»,<br>
+                потом поделись самой важной через форму - она попадёт в Общее созвездие!
             </div>
         </div>
     </div>
@@ -810,98 +1225,79 @@
     <script>
         // КОНФИГУРАЦИЯ
         const CONFIG = {
-            INITIAL_STARS: 30,
-            MAX_STAR_SIZE: 6,
-            MIN_STAR_SIZE: 2,
+            INITIAL_STARS: 35,
+            MAX_STAR_SIZE: 7,
+            MIN_STAR_SIZE: 3,
             BACKGROUND_STARS: 150,
-            GOOGLE_FORM_URL: "https://docs.google.com/forms/d/e/1FAIpQLSd3D5ypAsFGGBfoWOAlC1230iqpuaXgvyICj43VbYReOZfNuw/viewform?pli=1",
             VALUE_COLORS: {
+                'Достоинство': '#ffaa66',
+                'Сопричастность': '#66ffaa',
+                'Мастерство': '#ff66aa',
+                'Устойчивость': '#66aaff',
+                'Глобальное мышление': '#dd66ff',
                 'Уважение': '#ff6666',
                 'Ответственность': '#6699ff',
                 'Дружба': '#ff9900',
                 'Справедливость': '#32cd32',
                 'Спорт': '#9370db',
-                'Другой': '#ffdd00',
                 'Свобода': '#ff69b4',
-                'Другой вариант': '#00ced1',
-                'Деньги': '#ff8c00'
+                'Творчество': '#ff44cc',
+                'Семья': '#ffaa44',
+                'Честность': '#44ffaa',
+                'Забота': '#ff88aa',
+                'Другой': '#ffdd00'
             }
         };
 
-        // ДАННЫЕ ИЗ GOOGLE FORMS (Excel таблицы) - ИСПРАВЛЕННАЯ ВЕРСИЯ
-        const GOOGLE_FORM_DATA = [
-            {name: "Матвей", class: "6", value: "Свобода", reason: ""},
-            {name: "Матвей", class: "6", value: "Уважение", reason: ""},
+        const COMMON_VALUES_DATA = [
+            {name: "Матвей", class: "6", value: "Уважение", reason: "Уважение это фундамент на котором держится доверие и дружба"},
             {name: "СВЕТА", class: "11", value: "Свобода", reason: "Свобода позволяет быть собой!"},
-            {name: "Артемий", class: "10", value: "Дружба", reason: "Она создаёт фундамент на дальнейшую деятельность учащихся и определяет их личные ценности"},
+            {name: "Артемий", class: "10", value: "Дружба", reason: "Она создаёт фундамент на дальнейшую деятельность учащихся"},
             {name: "Мария", class: "10", value: "Дружба", reason: "Она делает меня счастливее"},
-            {name: "Демид", class: "6", value: "Другой вариант", reason: "Я люблю деньги потому что они дают много возможностей"},
-            {name: "Андрей", class: "6", value: "Спорт", reason: "Я много лет занимаюсь спортом"},
-            {name: "Саша", class: "11", value: "Справедливость", reason: ""},
-            {name: "Вика", class: "7", value: "Ответственность", reason: "Ответственность важна, потому что она является фундаментом доверия и основой для осмысленных действий, которые приносят реальную пользу."},
-            {name: "Мария В", class: "7", value: "Справедливость", reason: "Так как на ней должны строиться самые важные человеческие качества"},
-            {name: "Лиза Никифорова", class: "7", value: "Свобода", reason: ""},
-            {name: "Вадим", class: "7", value: "Дружба", reason: "Без дружбы не будет других ценностей таких как уважение или справедливость"},
-            {name: "Ярослав", class: "7", value: "Свобода", reason: "Свобода является основой всех других ценностей"},
+            {name: "Вика", class: "7", value: "Ответственность", reason: "Фундамент доверия и основа для осмысленных действий"},
+            {name: "Вадим", class: "7", value: "Дружба", reason: "Без дружбы не будет других ценностей"},
             {name: "Тимур", class: "7", value: "Дружба", reason: "друзья всегда помогут"},
-            {name: "Петрова Валерия", class: "7", value: "Дружба", reason: "Важно иметь друзей и товарищей, ведь в этом лежит основа успеха."},
-            {name: "Даниил Жегалин", class: "7", value: "Ответственность", reason: "Потому что ответственность - это когда кто - то обязуется выполнить часть задач, которые не может сделать другой. Без ответственности не было бы современного мира."},
-            {name: "София Кайтмазова", class: "7", value: "Уважение", reason: "Уважение рождает идею, полезный разговор или приятную встречу. Оно рождает все, что связано с общением — и это важно."},
-            {name: "Андрей", class: "6", value: "Спорт", reason: "Потому что я очень часто занимаюсь спортом и я его люблю"},
-            {name: "Георгий", class: "7", value: "Ответственность", reason: "Потому что это очень важный опыт с самого детства, который в будущем поможет стать лидером"},
-            {name: "Света", class: "11", value: "Справедливость", reason: ""},
-            {name: "Леша", class: "8", value: "Дружба", reason: "Потому что друзья для меня очень важны"},
-            {name: "Лука", class: "8", value: "Другой вариант", reason: ""},
-            {name: "Варя", class: "8", value: "Уважение", reason: "если мы будем все уважать друг друга то все будет уравновешенно и спокойно"},
-            {name: "Щеглов Павел", class: "8", value: "Дружба", reason: "Помогает в жизни"}
+            {name: "Даниил Жегалин", class: "7", value: "Ответственность", reason: "Без ответственности не было бы современного мира"},
+            {name: "София Кайтмазова", class: "7", value: "Уважение", reason: "Уважение рождает полезный разговор или приятную встречу"},
+            {name: "Георгий", class: "7", value: "Ответственность", reason: "Важный опыт с детства, который поможет стать лидером"},
+            {name: "Леша", class: "8", value: "Дружба", reason: "Друзья для меня очень важны"},
+            {name: "Варя", class: "8", value: "Уважение", reason: "Если будем уважать друг друга, то все будет уравновешенно"},
+            {name: "Павел", class: "8", value: "Дружба", reason: "Помогает в жизни"}
         ];
         
-        // Элементы
+        let stars = [];
+        let userStars = JSON.parse(localStorage.getItem('gymnasiumValues')) || [];
+        let particles = [];
+        let hoveredStar = null;
+        let devicePixelRatio = window.devicePixelRatio || 1;
+        
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         const tooltip = document.getElementById('tooltip');
         
-        // Переменные
-        let stars = [];
-        let userStars = JSON.parse(localStorage.getItem('gymnasiumValues')) || [];
-        let googleFormStars = [];
-        let particles = [];
-        let hoveredStar = null;
-        let devicePixelRatio = window.devicePixelRatio || 1;
-        let touchTimer = null;
-        
-        // Инициализация
         function init() {
-            console.log("Инициализация начата");
             setupCanvas();
             createStars(CONFIG.INITIAL_STARS);
             createBackgroundStars(CONFIG.BACKGROUND_STARS);
             loadUserStars();
-            loadGoogleFormStars();
+            loadCommonStars();
             
-            // Скрываем загрузку
             setTimeout(() => {
-                document.getElementById('loading').style.display = 'none';
+                const loadingEl = document.getElementById('loading');
+                loadingEl.style.opacity = '0';
+                setTimeout(() => {
+                    loadingEl.style.display = 'none';
+                }, 500);
                 animate();
             }, 1500);
             
-            // События
             window.addEventListener('resize', setupCanvas);
             canvas.addEventListener('mousemove', handleMouseMove);
             canvas.addEventListener('mouseleave', handleMouseLeave);
-            canvas.addEventListener('click', handleStarClick);
-            
-            // Для телефонов
-            if ('ontouchstart' in window) {
-                canvas.addEventListener('touchstart', handleTouchStart, { passive: true });
-                canvas.addEventListener('touchmove', handleTouchMove, { passive: true });
-                canvas.addEventListener('touchend', handleTouchEnd);
-            }
             
             setupForm();
             setupStatsTabs();
             updateStats();
-            console.log("Инициализация завершена. Всего звезд: " + stars.length);
         }
         
         function setupCanvas() {
@@ -941,7 +1337,7 @@
                     glow: 0,
                     isHovered: false,
                     isUserStar: false,
-                    isGoogleStar: false
+                    isCommonStar: false
                 });
             }
         }
@@ -955,18 +1351,16 @@
             const width = canvas.width / devicePixelRatio;
             const height = canvas.height / devicePixelRatio;
 
-            // Удаляем старые звёзды Матвея
-            stars = stars.filter(star => !star.isMatvey);
+            stars = stars.filter(star => !star.isMatvey && !star.isUserStar);
 
-            // СОЗДАЁМ ЗВЕЗДУ МАТВЕЯ В ЦЕНТРЕ
             stars.push({
                 id: 999,
                 x: width / 2,
                 y: height / 2,
                 originalX: width / 2,
                 originalY: height / 2,
-                baseSize: 7,
-                currentSize: 7,
+                baseSize: 8,
+                currentSize: 8,
                 color: CONFIG.VALUE_COLORS['Уважение'],
                 name: "Матвей Левченко",
                 class: "6 класс",
@@ -980,19 +1374,17 @@
                 isHovered: false,
                 isUserStar: true,
                 isMatvey: true,
-                isGoogleStar: false,
+                isCommonStar: false,
                 rotation: 0,
                 rotationSpeed: 0.001 + Math.random() * 0.002
             });
 
-            // Добавляем звёзды пользователей
             userStars.forEach((starData, index) => {
-                if (starData.name !== "Матвей Левченко") {
+                if (starData.name !== "Матвей Левченко" && starData.reason && starData.reason.trim() !== "") {
                     addStarToGalaxy(starData, 1000 + index, false);
                 }
             });
 
-            // Сохраняем звезду Матвея в localStorage
             const hasMatveyStar = userStars.some(star => star.name === "Матвей Левченко");
             if (!hasMatveyStar) {
                 userStars.unshift({
@@ -1007,49 +1399,30 @@
             }
         }
         
-        function loadGoogleFormStars() {
-            console.log("Загрузка звезд из Google Forms...");
-            const width = canvas.width / devicePixelRatio;
-            const height = canvas.height / devicePixelRatio;
+        function loadCommonStars() {
+            stars = stars.filter(star => !star.isCommonStar);
 
-            // Очищаем старые звёзды из Google Forms
-            stars = stars.filter(star => !star.isGoogleStar);
-
-            // Добавляем звёзды из Google Forms
-            GOOGLE_FORM_DATA.forEach((starData, index) => {
-                const googleStar = {
-                    name: starData.name,
-                    class: starData.class,
-                    value: starData.value,
-                    reason: starData.reason || "Пользователь не указал причину",
-                    isGoogleStar: true
-                };
-                
-                googleFormStars.push(googleStar);
-                addStarToGalaxy(googleStar, 5000 + index, true);
+            COMMON_VALUES_DATA.forEach((starData, index) => {
+                if (starData.reason && starData.reason.trim() !== "") {
+                    addStarToGalaxy(starData, 5000 + index, true);
+                }
             });
-            
-            console.log("Загружено звезд из Google Forms: " + googleFormStars.length);
         }
         
-        function addStarToGalaxy(starData, id, isGoogleStar) {
+        function addStarToGalaxy(starData, id, isCommonStar) {
             const width = canvas.width / devicePixelRatio;
             const height = canvas.height / devicePixelRatio;
 
-            // Для Google Forms звёзд делаем их меньше и распределяем дальше
-            const size = isGoogleStar ? (3 + Math.random() * 2) : (4 + Math.random() * 3);
+            const size = isCommonStar ? (3 + Math.random() * 2) : (4 + Math.random() * 3);
 
-            // Распределяем в разных областях в зависимости от типа
             const centerX = width / 2;
             const centerY = height / 2;
             let radius, angle;
 
-            if (isGoogleStar) {
-                // Google Forms звёзды - дальше от центра, в разных квадрантах
+            if (isCommonStar) {
                 radius = 200 + Math.random() * 300;
                 angle = Math.random() * Math.PI * 2;
             } else {
-                // Личные звёзды - ближе к центру
                 radius = 100 + Math.random() * 200;
                 angle = Math.random() * Math.PI * 2;
             }
@@ -1057,7 +1430,6 @@
             const x = centerX + Math.cos(angle) * radius;
             const y = centerY + Math.sin(angle) * radius;
 
-            // Нормализуем значение для цвета
             let valueForColor = starData.value;
             if (valueForColor === "Другой вариант" || valueForColor === "Деньги") {
                 valueForColor = "Другой";
@@ -1080,10 +1452,10 @@
                 angle: Math.random() * Math.PI * 2,
                 pulse: Math.random() * Math.PI * 2,
                 pulseSpeed: 0.005 + Math.random() * 0.01,
-                glow: isGoogleStar ? 0.5 : 1.0,
+                glow: isCommonStar ? 0.5 : 1.0,
                 isHovered: false,
-                isUserStar: !isGoogleStar,
-                isGoogleStar: isGoogleStar,
+                isUserStar: !isCommonStar,
+                isCommonStar: isCommonStar,
                 isMatvey: starData.name === "Матвей Левченко",
                 rotation: Math.random() * Math.PI * 2,
                 rotationSpeed: 0.0005 + Math.random() * 0.001
@@ -1102,7 +1474,6 @@
             }
         }
         
-        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ОБРАБОТКИ ДВИЖЕНИЯ МЫШИ
         function handleMouseMove(event) {
             const rect = canvas.getBoundingClientRect();
             const scaleX = canvas.width / devicePixelRatio / rect.width;
@@ -1111,7 +1482,6 @@
             const x = (event.clientX - rect.left) * scaleX;
             const y = (event.clientY - rect.top) * scaleY;
             
-            // Сбрасываем предыдущую подсвеченную звезду
             if (hoveredStar) {
                 hoveredStar.isHovered = false;
                 hoveredStar.glow = getDefaultGlow(hoveredStar);
@@ -1119,6 +1489,7 @@
             }
             
             tooltip.style.opacity = '0';
+            tooltip.classList.remove('show');
             
             let closestStar = null;
             let minDistance = Infinity;
@@ -1127,7 +1498,7 @@
                 const dx = x - star.x;
                 const dy = y - star.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
-                const hoverRadius = star.baseSize * 15; // Увеличил радиус ховера
+                const hoverRadius = star.baseSize * 15;
                 
                 if (distance < hoverRadius && distance < minDistance) {
                     minDistance = distance;
@@ -1145,99 +1516,16 @@
         
         function getDefaultGlow(star) {
             if (star.isMatvey) return 2.0;
-            if (star.isGoogleStar) return 0.5;
+            if (star.isCommonStar) return 0.5;
             if (star.isUserStar) return 1.0;
             return 0;
         }
         
         function getHoveredGlow(star) {
             if (star.isMatvey) return 3.0;
-            if (star.isGoogleStar) return 2.0;
+            if (star.isCommonStar) return 2.0;
             if (star.isUserStar) return 2.0;
             return 1.0;
-        }
-        
-        function handleTouchStart(event) {
-            if (event.touches.length === 1) {
-                const touch = event.touches[0];
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / devicePixelRatio / rect.width;
-                const scaleY = canvas.height / devicePixelRatio / rect.height;
-                
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
-
-                let closestStar = null;
-                let minDistance = Infinity;
-
-                for (let star of stars) {
-                    const dx = x - star.x;
-                    const dy = y - star.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const hoverRadius = star.baseSize * 20;
-
-                    if (distance < hoverRadius && distance < minDistance) {
-                        minDistance = distance;
-                        closestStar = star;
-                    }
-                }
-
-                if (closestStar) {
-                    closestStar.isHovered = true;
-                    closestStar.glow = getHoveredGlow(closestStar);
-                    hoveredStar = closestStar;
-                    showTooltip(closestStar, touch.clientX, touch.clientY);
-
-                    // На мобильных показываем подсказку на 2 секунды
-                    if (touchTimer) clearTimeout(touchTimer);
-                    touchTimer = setTimeout(() => {
-                        tooltip.style.opacity = '0';
-                        if (hoveredStar) {
-                            hoveredStar.isHovered = false;
-                            hoveredStar.glow = getDefaultGlow(hoveredStar);
-                            hoveredStar = null;
-                        }
-                    }, 2000);
-                }
-            }
-        }
-        
-        function handleTouchMove(event) {
-            if (event.touches.length === 1) {
-                const touch = event.touches[0];
-                const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / devicePixelRatio / rect.width;
-                const scaleY = canvas.height / devicePixelRatio / rect.height;
-                
-                const x = (touch.clientX - rect.left) * scaleX;
-                const y = (touch.clientY - rect.top) * scaleY;
-
-                let closestStar = null;
-                let minDistance = Infinity;
-
-                for (let star of stars) {
-                    const dx = x - star.x;
-                    const dy = y - star.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    const hoverRadius = star.baseSize * 20;
-
-                    if (distance < hoverRadius && distance < minDistance) {
-                        minDistance = distance;
-                        closestStar = star;
-                    }
-                }
-
-                if (closestStar) {
-                    closestStar.isHovered = true;
-                    closestStar.glow = getHoveredGlow(closestStar);
-                    hoveredStar = closestStar;
-                    showTooltip(closestStar, touch.clientX, touch.clientY);
-                }
-            }
-        }
-        
-        function handleTouchEnd() {
-            if (touchTimer) clearTimeout(touchTimer);
         }
         
         function handleMouseLeave() {
@@ -1247,25 +1535,16 @@
                 hoveredStar = null;
             }
             tooltip.style.opacity = '0';
+            tooltip.classList.remove('show');
         }
         
-        function handleStarClick() {
-            if (hoveredStar) {
-                hoveredStar.glow = hoveredStar.isMatvey ? 4.0 : 3.0;
-                setTimeout(() => hoveredStar.glow = getDefaultGlow(hoveredStar), 300);
-                // Показываем подсказку ещё раз при клике
-                showTooltip(hoveredStar, hoveredStar.x, hoveredStar.y);
-            }
-        }
-        
-        // ИСПРАВЛЕННАЯ ФУНКЦИЯ ПОКАЗА ПОДСКАЗКИ
         function showTooltip(star, clientX, clientY) {
             let sourceBadge = '';
             
-            if (star.isGoogleStar) {
-                sourceBadge = '<div style="color: #34a853; font-size: 11px; margin-bottom: 5px; font-weight: bold;">🌐 Google Форма</div>';
+            if (star.isCommonStar) {
+                sourceBadge = '<div style="color: #ffaa44; font-size: 11px; margin-bottom: 6px; font-weight: bold;">🌟 Общее созвездие</div>';
             } else if (star.isUserStar) {
-                sourceBadge = '<div style="color: #ffdd00; font-size: 11px; margin-bottom: 5px; font-weight: bold;">⭐ Личная звезда</div>';
+                sourceBadge = '<div style="color: #ffdd00; font-size: 11px; margin-bottom: 6px; font-weight: bold;">⭐ Мои звёзды</div>';
             }
             
             tooltip.innerHTML = star.name ? `
@@ -1273,23 +1552,21 @@
                 <div class="star-name">⭐ ${star.name}</div>
                 <div class="star-info"><strong>Класс:</strong> ${star.class}</div>
                 <div class="star-info"><strong>Ценность:</strong> ${star.value}</div>
-                <div class="star-info"><strong>Почему:</strong> ${star.reason}</div>
+                <div class="star-info"><strong>Почему:</strong> ${star.reason.substring(0, 120)}${star.reason.length > 120 ? '…' : ''}</div>
             ` : `
                 <div class="star-name">✨ Звезда галактики</div>
-                <div class="star-info">Нажми "Добавить свою звезду"!</div>
+                <div class="star-info">Нажми "Создать звёзду" чтобы добавить свою!</div>
             `;
             
-            // Показываем tooltip
             tooltip.style.opacity = '1';
+            tooltip.classList.add('show');
             
-            // Рассчитываем позицию tooltip
             const tooltipWidth = tooltip.offsetWidth || 300;
             const tooltipHeight = tooltip.offsetHeight || 150;
             
             let x = clientX + 20;
             let y = clientY + 20;
             
-            // Проверяем границы экрана
             if (x + tooltipWidth > window.innerWidth) {
                 x = clientX - tooltipWidth - 20;
             }
@@ -1298,7 +1575,6 @@
                 y = clientY - tooltipHeight - 20;
             }
             
-            // Устанавливаем минимальные значения
             x = Math.max(10, Math.min(x, window.innerWidth - tooltipWidth - 10));
             y = Math.max(10, Math.min(y, window.innerHeight - tooltipHeight - 10));
             
@@ -1306,19 +1582,15 @@
             tooltip.style.top = y + 'px';
         }
         
-        // ФУНКЦИЯ РИСОВАНИЯ ПЯТИКОНЕЧНОЙ ЗВЕЗДЫ
         function drawStar(star, time) {
-            // Пульсация размера
             star.pulse += star.pulseSpeed;
             const pulseFactor = 0.8 + Math.sin(star.pulse) * 0.2;
             const size = star.baseSize * pulseFactor;
             
-            // Вращение звезды
             star.rotation = star.rotation || 0;
             star.rotationSpeed = star.rotationSpeed || 0.001;
             star.rotation += star.rotationSpeed;
             
-            // 1. Рисуем ПУЛЬСИРУЮЩЕЕ СВЕЧЕНИЕ вокруг звезды
             if (star.glow > 0) {
                 const glowSize = size * (3 + star.glow * 2 + Math.sin(time * 0.5) * 0.5);
                 const gradient = ctx.createRadialGradient(
@@ -1337,16 +1609,13 @@
                 ctx.fill();
             }
             
-            // 2. Рисуем ПЯТИКОНЕЧНУЮ ЗВЕЗДУ
             ctx.save();
             ctx.translate(star.x, star.y);
             ctx.rotate(star.rotation);
             
-            // Размеры для пятиконечной звезды
             const outerRadius = size;
             const innerRadius = size * 0.4;
             
-            // Градиент для звезды
             const starGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, outerRadius);
             starGradient.addColorStop(0, star.color);
             starGradient.addColorStop(0.7, star.color);
@@ -1355,7 +1624,6 @@
             ctx.fillStyle = starGradient;
             ctx.beginPath();
             
-            // Рисуем пятиконечную звезду
             for (let i = 0; i < 10; i++) {
                 const angle = star.rotation + (i * Math.PI) / 5;
                 const radius = i % 2 === 0 ? outerRadius : innerRadius;
@@ -1369,18 +1637,15 @@
             ctx.closePath();
             ctx.fill();
             
-            // Обводка звезды
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 0.8;
             ctx.stroke();
             
-            // 3. Яркий центр звезды с вращающимся эффектом
             ctx.fillStyle = star.isMatvey ? '#ffff88' : '#ffffff';
             ctx.beginPath();
             ctx.arc(0, 0, size * 0.3, 0, Math.PI * 2);
             ctx.fill();
             
-            // 4. Вращающийся внутренний элемент
             ctx.fillStyle = star.color;
             ctx.beginPath();
             ctx.arc(0, 0, size * 0.15, 0, Math.PI * 2);
@@ -1397,7 +1662,6 @@
                     p.y = Math.random() * canvas.height / devicePixelRatio;
                 }
                 
-                // Мерцание
                 const twinkle = 0.6 + Math.sin(Date.now() * 0.001 + p.x * 0.01) * 0.4;
                 
                 ctx.fillStyle = `rgba(255, 255, 255, ${p.brightness * twinkle})`;
@@ -1407,7 +1671,6 @@
             });
         }
         
-        // Гармоничное движение звёзд
         function animate() {
             const width = canvas.width / devicePixelRatio;
             const height = canvas.height / devicePixelRatio;
@@ -1415,7 +1678,6 @@
             const centerY = height / 2;
             const time = Date.now() * 0.001;
             
-            // Градиентный фон
             const gradient = ctx.createLinearGradient(0, 0, 0, height);
             gradient.addColorStop(0, '#000010');
             gradient.addColorStop(0.5, '#0a0015');
@@ -1425,27 +1687,24 @@
             
             drawBackgroundStars();
             
-            // Обновление позиций звёзд
             for (let star of stars) {
-                // Звезда Матвея - плавное движение вокруг центра
                 if (star.isMatvey) {
-                    const orbitX = Math.cos(time * 0.1) * 30;
-                    const orbitY = Math.sin(time * 0.13) * 20;
-                    const waveX = Math.sin(time * 0.3) * 5;
-                    const waveY = Math.cos(time * 0.2) * 5;
+                    const orbitX = Math.cos(time * 0.08) * 28;
+                    const orbitY = Math.sin(time * 0.1) * 20;
+                    const waveX = Math.sin(time * 0.25) * 4;
+                    const waveY = Math.cos(time * 0.2) * 4;
                     star.x = centerX + orbitX + waveX;
                     star.y = centerY + orbitY + waveY;
                 }
-                // Остальные звёзды - вращение вокруг центра с разной скоростью
                 else {
                     const dx = star.originalX - centerX;
                     const dy = star.originalY - centerY;
                     const distance = Math.sqrt(dx*dx + dy*dy);
                     
-                    const orbitSpeed = 0.1 / (distance / 150 + 1);
-                    const angle = time * orbitSpeed + (star.id * 0.01);
+                    const orbitSpeed = 0.08 / (distance / 150 + 1);
+                    const angle = time * orbitSpeed + (star.id * 0.008);
                     
-                    const currentDist = distance * (0.95 + Math.sin(time * 0.08 + star.id) * 0.05);
+                    const currentDist = distance * (0.96 + Math.sin(time * 0.07 + star.id) * 0.04);
                     const orbitX = Math.cos(angle) * currentDist;
                     const orbitY = Math.sin(angle) * currentDist * 0.8;
                     
@@ -1453,22 +1712,66 @@
                     star.y = centerY + orbitY;
                 }
                 
-                // Пульсация
                 star.pulse += star.pulseSpeed;
-                
                 drawStar(star, time);
             }
             
             requestAnimationFrame(animate);
         }
         
-        // Функции формы
         function setupForm() {
             const form = document.getElementById('starForm');
             const valueOptions = document.querySelectorAll('.value-option');
             const customValueInput = document.getElementById('customValue');
             const selectedValueInput = document.getElementById('selectedValue');
             const otherOption = document.getElementById('otherOption');
+            
+            const gymnasiumOptions = document.querySelectorAll('#gymnasiumValues .value-option');
+            let activeTooltip = null;
+            
+            gymnasiumOptions.forEach(option => {
+                const description = option.getAttribute('data-description');
+                const valueName = option.getAttribute('data-value') || option.textContent.trim().replace(/[^а-яё\s]/gi, '').trim();
+                
+                option.addEventListener('mouseenter', function(e) {
+                    if (activeTooltip) activeTooltip.remove();
+                    
+                    const tooltipDiv = document.createElement('div');
+                    tooltipDiv.className = 'value-tooltip';
+                    tooltipDiv.innerHTML = `
+                        <div class="tooltip-icon">✨</div>
+                        <div class="tooltip-text">
+                            <div class="tooltip-title">${valueName}</div>
+                            <div>${description || 'Важная ценность, которая помогает нам становиться лучше'}</div>
+                        </div>
+                    `;
+                    document.body.appendChild(tooltipDiv);
+                    
+                    const rect = option.getBoundingClientRect();
+                    tooltipDiv.style.left = rect.left + 'px';
+                    tooltipDiv.style.top = (rect.top - tooltipDiv.offsetHeight - 10) + 'px';
+                    
+                    if (tooltipDiv.offsetTop < 0) {
+                        tooltipDiv.style.top = (rect.bottom + 10) + 'px';
+                    }
+                    
+                    activeTooltip = tooltipDiv;
+                });
+                
+                option.addEventListener('mouseleave', function() {
+                    if (activeTooltip) {
+                        activeTooltip.remove();
+                        activeTooltip = null;
+                    }
+                });
+                
+                option.addEventListener('click', function() {
+                    if (activeTooltip) {
+                        activeTooltip.remove();
+                        activeTooltip = null;
+                    }
+                });
+            });
             
             valueOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -1523,7 +1826,7 @@
                 closeForm();
                 updateStats();
                 
-                showNotification('Твоя звезда добавлена! ✨');
+                showNotification('✨ Твоя звезда создана! ✨');
                 form.reset();
                 valueOptions.forEach(opt => opt.classList.remove('selected'));
                 customValueInput.style.display = 'none';
@@ -1534,23 +1837,20 @@
         
         function setupStatsTabs() {
             const personalStatsBtn = document.getElementById('personalStatsBtn');
-            const googleStatsBtn = document.getElementById('googleStatsBtn');
+            const commonStatsBtn = document.getElementById('commonStatsBtn');
             const personalStats = document.getElementById('personalStats');
-            const googleStats = document.getElementById('googleStats');
+            const commonStats = document.getElementById('commonStats');
             
             personalStatsBtn.addEventListener('click', function() {
                 personalStats.style.display = 'block';
-                googleStats.style.display = 'none';
-                personalStatsBtn.style.background = 'linear-gradient(145deg, rgba(80, 80, 120, 0.95), rgba(50, 50, 80, 0.98))';
-                googleStatsBtn.style.background = 'linear-gradient(145deg, rgba(65, 105, 180, 0.7), rgba(45, 85, 160, 0.8))';
+                commonStats.style.display = 'none';
+                updateStats();
             });
             
-            googleStatsBtn.addEventListener('click', function() {
+            commonStatsBtn.addEventListener('click', function() {
                 personalStats.style.display = 'none';
-                googleStats.style.display = 'block';
-                personalStatsBtn.style.background = 'linear-gradient(145deg, rgba(80, 80, 120, 0.7), rgba(50, 50, 80, 0.8))';
-                googleStatsBtn.style.background = 'linear-gradient(145deg, rgba(65, 105, 180, 0.95), rgba(45, 85, 160, 0.98))';
-                updateGoogleStats();
+                commonStats.style.display = 'block';
+                updateCommonStats();
             });
         }
         
@@ -1561,15 +1861,18 @@
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                background: linear-gradient(45deg, #32cd32, #00ced1);
-                color: black;
-                padding: 15px 25px;
-                border-radius: 12px;
+                background: linear-gradient(135deg, #2ecc71, #27ae60);
+                color: white;
+                padding: 18px 32px;
+                border-radius: 60px;
                 font-weight: bold;
                 z-index: 10001;
-                box-shadow: 0 10px 30px rgba(50, 205, 50, 0.5);
+                box-shadow: 0 10px 30px rgba(46, 204, 113, 0.5);
                 text-align: center;
                 animation: fadeInOut 2s ease-in-out;
+                font-family: 'Orbitron', monospace;
+                font-size: 16px;
+                white-space: nowrap;
             `;
             
             const style = document.createElement('style');
@@ -1590,7 +1893,6 @@
             }, 2000);
         }
         
-        // Модальные окна
         window.openForm = function() {
             document.getElementById('formOverlay').style.display = 'flex';
             document.getElementById('studentName').focus();
@@ -1602,7 +1904,7 @@
         
         window.openStats = function() {
             updateStats();
-            updateGoogleStats();
+            updateCommonStats();
             document.getElementById('statsOverlay').style.display = 'flex';
         };
         
@@ -1618,29 +1920,23 @@
             document.getElementById('infoOverlay').style.display = 'none';
         };
         
-        // ИСПРАВЛЕННАЯ СТАТИСТИКА
         function updateStats() {
-            // Фильтруем звёзды пользователя (без Матвея и Google Forms)
             const userStarsFiltered = userStars.filter(star => 
-                !star.isMatvey && !star.isGoogleStar
+                !star.isMatvey && star.reason && star.reason.trim() !== ""
             );
             
-            // Общее количество личных звезд
             document.getElementById('totalStars').textContent = userStarsFiltered.length;
             
             if (userStarsFiltered.length > 0) {
-                // Мой класс (из последней добавленной звезды)
                 const lastStar = userStarsFiltered[userStarsFiltered.length - 1];
                 document.getElementById('myClass').textContent = lastStar.class + ' класс';
                 
-                // Подсчет ценностей
                 const valueCount = {};
                 userStarsFiltered.forEach(star => {
                     const value = star.value || 'Не указано';
                     valueCount[value] = (valueCount[value] || 0) + 1;
                 });
                 
-                // Находим главную ценность
                 let mainValue = '-';
                 let maxCount = 0;
                 for (const [value, count] of Object.entries(valueCount)) {
@@ -1650,19 +1946,8 @@
                     }
                 }
                 document.getElementById('myMainValue').textContent = mainValue;
+                document.getElementById('popularValue').textContent = mainValue;
                 
-                // Находим популярную ценность
-                let popularValue = '-';
-                let popularCount = 0;
-                for (const [value, count] of Object.entries(valueCount)) {
-                    if (count > popularCount) {
-                        popularCount = count;
-                        popularValue = value;
-                    }
-                }
-                document.getElementById('popularValue').textContent = popularValue;
-                
-                // Распределение ценностей
                 let distributionHTML = '';
                 const sortedValues = Object.entries(valueCount)
                     .sort((a, b) => b[1] - a[1]);
@@ -1698,24 +1983,20 @@
             }
         }
         
-        // СТАТИСТИКА GOOGLE FORMS
-        function updateGoogleStats() {
-            // Общее количество звёзд из Google Forms
-            document.getElementById('totalGoogleStars').textContent = googleFormStars.length;
+        function updateCommonStats() {
+            const commonStarsList = stars.filter(star => star.isCommonStar && star.name);
+            document.getElementById('totalCommonStars').textContent = commonStarsList.length;
             
-            // Количество уникальных участников
-            const uniqueParticipants = new Set(googleFormStars.map(star => star.name));
+            const uniqueParticipants = new Set(commonStarsList.map(star => star.name));
             document.getElementById('totalParticipants').textContent = uniqueParticipants.size;
             
-            if (googleFormStars.length > 0) {
-                // Распределение по классам
+            if (commonStarsList.length > 0) {
                 const classCount = {};
-                googleFormStars.forEach(star => {
-                    const className = star.class + ' класс';
+                commonStarsList.forEach(star => {
+                    const className = star.class;
                     classCount[className] = (classCount[className] || 0) + 1;
                 });
                 
-                // Самый популярный класс
                 let popularClass = '-';
                 let maxClassCount = 0;
                 for (const [className, count] of Object.entries(classCount)) {
@@ -1726,15 +2007,14 @@
                 }
                 document.getElementById('popularClass').textContent = popularClass;
                 
-                // Распределение по классам для графика
                 let classDistributionHTML = '';
                 const sortedClasses = Object.entries(classCount)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 8); // Показываем топ-8 классов
+                    .slice(0, 8);
                 
                 if (sortedClasses.length > 0) {
                     sortedClasses.forEach(([className, count]) => {
-                        const percentage = Math.round((count / googleFormStars.length) * 100);
+                        const percentage = Math.round((count / commonStarsList.length) * 100);
                         const color = getClassColor(className);
                         
                         classDistributionHTML += `
@@ -1755,18 +2035,15 @@
                 
                 document.getElementById('classDistribution').innerHTML = classDistributionHTML;
                 
-                // Распределение ценностей
                 const valueCount = {};
-                googleFormStars.forEach(star => {
+                commonStarsList.forEach(star => {
                     let value = star.value;
-                    // Нормализуем значения
                     if (value === "Другой вариант") {
                         value = "Другой";
                     }
                     valueCount[value] = (valueCount[value] || 0) + 1;
                 });
                 
-                // Топ ценность
                 let topValue = '-';
                 let maxValueCount = 0;
                 for (const [value, count] of Object.entries(valueCount)) {
@@ -1775,20 +2052,19 @@
                         topValue = value;
                     }
                 }
-                document.getElementById('topGoogleValue').textContent = topValue;
+                document.getElementById('topCommonValue').textContent = topValue;
                 
-                // Распределение ценностей для графика
-                let googleValuesHTML = '';
-                const sortedGoogleValues = Object.entries(valueCount)
+                let commonValuesHTML = '';
+                const sortedValues = Object.entries(valueCount)
                     .sort((a, b) => b[1] - a[1])
-                    .slice(0, 10); // Показываем топ-10 ценностей
+                    .slice(0, 10);
                 
-                if (sortedGoogleValues.length > 0) {
-                    sortedGoogleValues.forEach(([value, count]) => {
-                        const percentage = Math.round((count / googleFormStars.length) * 100);
+                if (sortedValues.length > 0) {
+                    sortedValues.forEach(([value, count]) => {
+                        const percentage = Math.round((count / commonStarsList.length) * 100);
                         const color = CONFIG.VALUE_COLORS[value] || CONFIG.VALUE_COLORS['Другой'];
                         
-                        googleValuesHTML += `
+                        commonValuesHTML += `
                             <div class="distribution-item">
                                 <span style="min-width: 100px; color: ${color}; font-weight: bold;">${value}</span>
                                 <div style="flex: 1; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; margin: 0 10px; overflow: hidden;">
@@ -1801,28 +2077,26 @@
                         `;
                     });
                 } else {
-                    googleValuesHTML = '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных по ценностям</div>';
+                    commonValuesHTML = '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных по ценностям</div>';
                 }
                 
-                document.getElementById('googleValuesDistribution').innerHTML = googleValuesHTML;
+                document.getElementById('commonValuesDistribution').innerHTML = commonValuesHTML;
             } else {
                 document.getElementById('popularClass').textContent = '-';
-                document.getElementById('topGoogleValue').textContent = '-';
+                document.getElementById('topCommonValue').textContent = '-';
                 document.getElementById('classDistribution').innerHTML = 
-                    '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных из Google Forms</div>';
-                document.getElementById('googleValuesDistribution').innerHTML = 
-                    '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных из Google Forms</div>';
+                    '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных. Добавь свою ценность через форму!</div>';
+                document.getElementById('commonValuesDistribution').innerHTML = 
+                    '<div style="color: #aaddff; text-align: center; padding: 20px;">Нет данных. Добавь свою ценность через форму!</div>';
             }
         }
         
         function getClassColor(className) {
-            // Генерируем цвет на основе номера класса
             const classNumber = parseInt(className) || 1;
             const hue = (classNumber * 30) % 360;
             return `hsl(${hue}, 70%, 60%)`;
         }
         
-        // Запуск при загрузке
         window.addEventListener('load', init);
     </script>
 </body>
